@@ -1358,14 +1358,6 @@ local function createMenu()
         TabsBarWidth + 5, 5 + MachoPaneGap, 
         TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
 
-MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
-    function()
-        enableRandomOutfit = true
-    end,
-    function()
-        enableRandomOutfit = false
-    end
-)
 MachoMenuText(GeneralLeftSection,"Exploits & Self")
 MachoMenuCheckbox(GeneralLeftSection, "Super Punch", 
     function()
@@ -2590,6 +2582,7 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
             MachoMenuNotification("Godmode", "Godmode Deactivated")
         end
     )
+
     local GeneralRightTop = MachoMenuGroup(GeneralTab, "looks & Outfits", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap, 
         MenuSize.x - 5, 5 + MachoPaneGap + RightSectionHeight)
@@ -2628,6 +2621,15 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
 end)
 local enableRandomOutfit = false
 local outfitChangeInterval = 0 
+
+   MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
+    function()
+        enableRandomOutfit = true
+    end,
+    function()
+        enableRandomOutfit = false
+    end
+)
 
          MachoMenuText(GeneralRightTop,"i will add it")
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
