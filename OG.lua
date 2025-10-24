@@ -6,10 +6,13 @@
 --end
 
 
+
 ------------------------------------- Menu creation -------------------------------------
 local function createMenu()
     MenuWindow = MachoMenuTabbedWindow("oring", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+   
     MachoMenuSetAccent(MenuWindow, 255, 255, 0)
+   
     MachoMenuSetText(MenuWindow,"sssss")
 
 
