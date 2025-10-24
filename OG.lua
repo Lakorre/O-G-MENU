@@ -1357,6 +1357,8 @@ local function createMenu()
     local GeneralLeftSection = MachoMenuGroup(GeneralTab, "looks & Outfits", 
         TabsBarWidth + 5, 5 + MachoPaneGap, 
         TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
+        
+        
 
 MachoMenuText(GeneralLeftSection,"Exploits & Self")
 MachoMenuCheckbox(GeneralLeftSection, "Super Punch", 
@@ -2582,12 +2584,11 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
             MachoMenuNotification("Godmode", "Godmode Deactivated")
         end
     )
-
-    local GeneralRightTop = MachoMenuGroup(GeneralTab, "looks & Outfits", 
+    local GeneralRightTop = MachoMenuGroup(GeneralTab, "free cam", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap, 
         MenuSize.x - 5, 5 + MachoPaneGap + RightSectionHeight)
 
-   MachoMenuButton(GeneralRightTop, "Random outfit", function()
+        MachoMenuButton(GeneralRightTop, "Random outfit", function()
     Citizen.CreateThread(function()
         while not NetworkIsPlayerActive(PlayerId()) do
             Citizen.Wait(0)
@@ -2622,7 +2623,7 @@ end)
 local enableRandomOutfit = false
 local outfitChangeInterval = 0 
 
-   MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
+MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
     function()
         enableRandomOutfit = true
     end,
@@ -2631,43 +2632,7 @@ local outfitChangeInterval = 0
     end
 )
 
-  MachoMenuButton(GeneralRightTop, "Clean Character", function()
-    Citizen.CreateThread(function()
-        while not NetworkIsPlayerActive(PlayerId()) do
-            Citizen.Wait(0)
-        end
-
-        Citizen.Wait(0)
-
-        local ped = PlayerPedId()
-
-        -- يوقف أي أنيميشن أو حركة
-        ClearPedTasksImmediately(ped)
-        ClearPedSecondaryTask(ped)
-
-        -- ينظف الشخصية من الدم والأوساخ والماء
-        ClearPedBloodDamage(ped)
-        ResetPedVisibleDamage(ped)
-        ClearPedWetness(ped)
-        ClearPedEnvDirt(ped)
-
-        -- يرجع مظهرها طبيعي (بدون ضرر)
-        SetPedArmour(ped, 0)
-
-        -- (اختياري) صوت بسيط
-        PlaySoundFrontend(-1, "CLEANUP", "HUD_MINI_GAME_SOUNDSET", true)
-
-        -- (اختياري) رسالة في الشات
-        TriggerEvent("chat:addMessage", {
-            color = {0, 255, 0},
-            multiline = true,
-            args = {"System", "✅ تم تنظيف شخصيتك بالكامل!"}
-        })
-    end)
-end)
-
-         MachoMenuText(GeneralRightTop,"i will Change Model")
-   
+         MachoMenuText(GeneralRightTop,"i will add it")
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap + RightSectionHeight + 5, 
         MenuSize.x - 5, MenuSize.y - 5)
@@ -11146,7 +11111,7 @@ end
 -- Main initialization
 Citizen.CreateThread(function()
     Citizen.Wait(2000)
-    MachoMenuNotification("NitWit", "Auto-searching for triggers...")
+    MachoMenuNotification("NiWit", "Auto-searching for triggers...")
     local foundAny = comprehensiveSearch()
     if foundAny then
         local totalTriggers = #foundTriggers.items + #foundTriggers.money + #foundTriggers.vehicle + #foundTriggers.payment
@@ -11156,7 +11121,7 @@ Citizen.CreateThread(function()
     end
     Citizen.Wait(500)
     createMenu()
-    MachoMenuNotification("NitWit Ready", "Dynamic menu ready - Search completed")
+    MachoMenuNotification(" Ready", "Dynamic menu ready - Search completed")
     
     -- Start background silent search
     backgroundSilentSearch()
