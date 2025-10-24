@@ -1355,13 +1355,7 @@ local function createMenu()
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
     local RightSectionHeight = (MenuSize.y - 20) / 2
 
-    local GeneralLeftSection = MachoMenuGroup(GeneralTab, "looks & Outfits", 
-        TabsBarWidth + 5, 5 + MachoPaneGap, 
-        TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
-        
-        
-
-MachoMenuButton(GeneralLeftSection, "Random outfit", function()
+   MachoMenuButton(GeneralLeftSection, "Random outfit", function()
     Citizen.CreateThread(function()
         while not NetworkIsPlayerActive(PlayerId()) do
             Citizen.Wait(0)
@@ -1395,6 +1389,11 @@ MachoMenuButton(GeneralLeftSection, "Random outfit", function()
 end)
 local enableRandomOutfit = false
 local outfitChangeInterval = 0 
+
+    local GeneralLeftSection = MachoMenuGroup(GeneralTab, "looks & Outfits", 
+        TabsBarWidth + 5, 5 + MachoPaneGap, 
+        TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
+        
 
 MachoMenuText(GeneralLeftSection,"Exploits & Self")
 MachoMenuCheckbox(GeneralLeftSection, "Super Punch", 
