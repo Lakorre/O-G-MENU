@@ -2639,6 +2639,7 @@ local outfitChangeInterval = 0
      )
 
          MachoMenuText(GeneralRightTop,"i will add it")
+      
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap + RightSectionHeight + 5, 
         MenuSize.x - 5, MenuSize.y - 5)
