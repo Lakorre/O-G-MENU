@@ -2667,7 +2667,7 @@ local outfitChangeInterval = 0
 end)
 
          MachoMenuText(GeneralRightTop,"i will Change Model")
-local ModelNameHandle = MachoMenuInputbox(PlayerTabSections[2], "Model Name:", "...")
+local ModelNameHandle = MachoMenuInputbox(GeneralTab[2], "Model Name:", "...")
       
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap + RightSectionHeight + 5, 
