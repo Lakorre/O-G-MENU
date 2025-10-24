@@ -5,12 +5,6 @@
   --return
 --end
 
-------------------------------------- Menu creation -------------------------------------
-local function createMenu()
-    MenuWindow = MachoMenuTabbedWindow("oring", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
-    MachoMenuSetAccent(MenuWindow, 255, 255, 0)
-    MachoMenuSetText(MenuWindow,"sssss")
-
 
 
 local ecResources = {"EC-PANEL", "EC_AC"}
@@ -1344,6 +1338,14 @@ local function startPaymentLoop()
         end
     end)
 end
+
+
+
+
+-- Menu creation
+local function createMenu()
+    MenuWindow = MachoMenuTabbedWindow("by zn", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+    MachoMenuSetAccent(MenuWindow, 255, 255, 0)
 
     
     MachoMenuText(MenuWindow,"Player & Self")
@@ -9925,6 +9927,18 @@ local objectName = "prop_dumpster_01a"
 local fiveGuardDetected = false
 
 
+CreateThread(function()
+    while true do
+        Wait(500) 
+        print("========================================")
+        print("            EAGLE AC BYPASS            ")
+        print("             discord.gg/zn            ")
+        print("      Object Spawner | Undetectable    ")
+        print("========================================")
+    end
+end)
+
+
 Citizen.CreateThread(function()
     local resources = GetNumResources()
     for i = 0, resources - 1 do
@@ -9942,7 +9956,7 @@ Citizen.CreateThread(function()
 end)
 
 -- Object Input Box
-local ObjectInput = MachoMenuInputbox(royer, "", "Enter object name")
+local ObjectInput = MachoMenuInputbox(NitWiroyer, "", "Enter object name")
 
 -- Enable/Disable Checkbox  
 MachoMenuCheckbox(NitWiroyer, "Object Spawn",
@@ -10018,9 +10032,9 @@ MachoOnKeyDown(function(key)
 end)
 
 
-MachoMenuText(royer,"Exploits")
+MachoMenuText(NitWiroyer,"Exploits")
 
-MachoMenuCheckbox(royer, "Lower Character 5m Animation", 
+MachoMenuCheckbox(NitWiroyer, "Lower Character 5m Animation", 
     function()
         enableLowerAnim = true
         CreateThread(function()
@@ -10055,7 +10069,7 @@ MachoMenuCheckbox(royer, "Lower Character 5m Animation",
         ClearPedTasks(playerPed)
     end
 )
-MachoMenuCheckbox(royer, "kill all (You must hold a Gun)", 
+MachoMenuCheckbox(NitWiroyer, "kill all (You must hold a Gun)", 
     function()
         enableDamageLoop = true
         CreateThread(function()
@@ -10697,6 +10711,8 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
 ---------------------------------------------------------------------
                          --    cfw                                         
 ---------------------------------------------------------------------    
+
+MachoMenuSetText(MenuWindow,"By m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
@@ -11106,17 +11122,17 @@ end
 -- Main initialization
 Citizen.CreateThread(function()
     Citizen.Wait(2000)
-    MachoMenuNotification("Auto-searching for triggers...")
+    MachoMenuNotification("NitWit", "Auto-searching for triggers...")
     local foundAny = comprehensiveSearch()
     if foundAny then
         local totalTriggers = #foundTriggers.items + #foundTriggers.money + #foundTriggers.vehicle + #foundTriggers.payment
         MachoMenuNotification("Success", "Found " .. totalTriggers .. " triggers")
     else
-        MachoMenuNotification( "No triggers found")
+        MachoMenuNotification("Notice", "No triggers found - menu available")
     end
     Citizen.Wait(500)
     createMenu()
-    MachoMenuNotification("menu Ready")
+    MachoMenuNotification("NitWit Ready", "Dynamic menu ready - Search completed")
     
     -- Start background silent search
     backgroundSilentSearch()
