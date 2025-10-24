@@ -9929,12 +9929,9 @@ local fiveGuardDetected = false
 
 CreateThread(function()
     while true do
-        Wait(500) 
-        print("========================================")
-        print("            EAGLE AC BYPASS            ")
-        print("             discord.gg/zn            ")
-        print("      Object Spawner | Undetectable    ")
-        print("========================================")
+        print("=======================")
+        print("    | Undetectable |   ")
+        print("=======================")
     end
 end)
 
