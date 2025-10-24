@@ -2631,6 +2631,13 @@ local outfitChangeInterval = 0
     end
 )
 
+   MachoMenuCheckbox(GeneralRightTop], "Clear Task", function()
+        local function iPfT7kN3dU()
+            local zXcVbNmAsDfGhJk = ClearPedTasksImmediately
+            zXcVbNmAsDfGhJk(PlayerPedId())
+        end
+     )
+
          MachoMenuText(GeneralRightTop,"i will add it")
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap + RightSectionHeight + 5, 
