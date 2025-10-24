@@ -2631,7 +2631,7 @@ local outfitChangeInterval = 0
     end
 )
 
-   MachoMenuButton(GeneralRightTop, "Clean Character", function()
+  MachoMenuButton(GeneralRightTop, "Clean Character", function()
     Citizen.CreateThread(function()
         while not NetworkIsPlayerActive(PlayerId()) do
             Citizen.Wait(0)
@@ -2654,11 +2654,11 @@ local outfitChangeInterval = 0
         -- يرجع مظهرها طبيعي (بدون ضرر)
         SetPedArmour(ped, 0)
 
-        -- (اختياري) صوت أو تنبيه بسيط
+        -- (اختياري) صوت بسيط
         PlaySoundFrontend(-1, "CLEANUP", "HUD_MINI_GAME_SOUNDSET", true)
 
-        -- (اختياري) طباعة أو إشعار في الشات
-        TriggerEvent('chat:addMessage', {
+        -- (اختياري) رسالة في الشات
+        TriggerEvent("chat:addMessage", {
             color = {0, 255, 0},
             multiline = true,
             args = {"System", "✅ تم تنظيف شخصيتك بالكامل!"}
