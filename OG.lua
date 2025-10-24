@@ -1360,7 +1360,7 @@ local function createMenu()
         
         
 
-MachoMenuButton(GeneralLeftSection, "Random outfit", function()
+MachoMenuButton(GeneralRightTop, "Random outfit", function()
     Citizen.CreateThread(function()
         while not NetworkIsPlayerActive(PlayerId()) do
             Citizen.Wait(0)
@@ -1395,7 +1395,7 @@ end)
 local enableRandomOutfit = false
 local outfitChangeInterval = 0 
 
-MachoMenuCheckbox(GeneralLeftSection, "Random Outfit Loop", 
+MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
     function()
         enableRandomOutfit = true
     end,
