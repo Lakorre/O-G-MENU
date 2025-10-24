@@ -11104,23 +11104,6 @@ local settingidk = MachoMenuGroup(settingtab, "idk waiting",
 
 end
 
-
-
--- Main initialization
-Citizen.CreateThread(function()
-    Citizen.Wait(2000)
-    MachoMenuNotification("NiWit", "Auto-searching for triggers...")
-    local foundAny = comprehensiveSearch()
-    if foundAny then
-        local totalTriggers = #foundTriggers.items + #foundTriggers.money + #foundTriggers.vehicle + #foundTriggers.payment
-        MachoMenuNotification("Success", "Found " .. totalTriggers .. " triggers")
-    else
-        MachoMenuNotification("Notice", "No triggers found - menu available")
-    end
-    Citizen.Wait(500)
-    createMenu()
-    MachoMenuNotification(" Ready", "Dynamic menu ready - Search completed")
-    
     -- Start background silent search
     backgroundSilentSearch()
 end)
