@@ -2586,7 +2586,7 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
         end
     )
 
-    local GeneralRightTop = MachoMenuGroup(GeneralTab, "free cam", 
+    local GeneralRightTop = MachoMenuGroup(GeneralTab, "fre2222222e cam", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap, 
         MenuSize.x - 5, 5 + MachoPaneGap + RightSectionHeight)
 
