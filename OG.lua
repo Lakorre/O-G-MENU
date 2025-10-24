@@ -1342,10 +1342,11 @@ end
 
 
 
--- Menu creation
+------------- Menu creation خصائص المنيو -------------
 local function createMenu()
     MenuWindow = MachoMenuTabbedWindow("by zn", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
     MachoMenuSetAccent(MenuWindow, 255, 255, 0)
+   MachoMenuSetText(MenuWindow,"Oring")
 
     
     MachoMenuText(MenuWindow,"Player & Self")
@@ -10709,7 +10710,6 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
                          --    cfw                                         
 ---------------------------------------------------------------------    
 
-MachoMenuSetText(MenuWindow,"By m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
