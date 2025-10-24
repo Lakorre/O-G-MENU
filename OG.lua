@@ -1357,43 +1357,6 @@ local function createMenu()
     local GeneralLeftSection = MachoMenuGroup(GeneralTab, "looks & Outfits", 
         TabsBarWidth + 5, 5 + MachoPaneGap, 
         TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
-        
-        
-
-MachoMenuButton(GeneralRightTop, "Random outfit", function()
-    Citizen.CreateThread(function()
-        while not NetworkIsPlayerActive(PlayerId()) do
-            Citizen.Wait(0)
-        end
-    
-        Citizen.Wait(0) 
-    
-        local model = GetHashKey("mp_m_freemode_01")  
-    
-        RequestModel(model)
-        while not HasModelLoaded(model) do
-            Citizen.Wait(0)
-        end
-    
-        SetPlayerModel(PlayerId(), model)
-        SetModelAsNoLongerNeeded(model)
-    
-        local newPed = PlayerPedId()
-    
-        SetPedComponentVariation(newPed, 8, math.random(0, 15), 0, 2)  
-        SetPedComponentVariation(newPed, 11, math.random(0, 120), 0, 2) 
-        SetPedComponentVariation(newPed, 3, math.random(0, 15), 0, 2)   
-        SetPedComponentVariation(newPed, 4, math.random(0, 50), 0, 2)   
-        SetPedComponentVariation(newPed, 6, math.random(0, 30), 0, 2)   
-    
-        SetPedPropIndex(newPed, 0, math.random(0, 10), 0, true) 
-        SetPedPropIndex(newPed, 1, math.random(0, 10), 0, true)  
-    
-    end)
-    
-end)
-local enableRandomOutfit = false
-local outfitChangeInterval = 0 
 
 MachoMenuCheckbox(GeneralRightTop, "Random Outfit Loop", 
     function()
@@ -2630,6 +2593,41 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
     local GeneralRightTop = MachoMenuGroup(GeneralTab, "looks & Outfits", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap, 
         MenuSize.x - 5, 5 + MachoPaneGap + RightSectionHeight)
+
+   MachoMenuButton(GeneralRightTop, "Random outfit", function()
+    Citizen.CreateThread(function()
+        while not NetworkIsPlayerActive(PlayerId()) do
+            Citizen.Wait(0)
+        end
+    
+        Citizen.Wait(0) 
+    
+        local model = GetHashKey("mp_m_freemode_01")  
+    
+        RequestModel(model)
+        while not HasModelLoaded(model) do
+            Citizen.Wait(0)
+        end
+    
+        SetPlayerModel(PlayerId(), model)
+        SetModelAsNoLongerNeeded(model)
+    
+        local newPed = PlayerPedId()
+    
+        SetPedComponentVariation(newPed, 8, math.random(0, 15), 0, 2)  
+        SetPedComponentVariation(newPed, 11, math.random(0, 120), 0, 2) 
+        SetPedComponentVariation(newPed, 3, math.random(0, 15), 0, 2)   
+        SetPedComponentVariation(newPed, 4, math.random(0, 50), 0, 2)   
+        SetPedComponentVariation(newPed, 6, math.random(0, 30), 0, 2)   
+    
+        SetPedPropIndex(newPed, 0, math.random(0, 10), 0, true) 
+        SetPedPropIndex(newPed, 1, math.random(0, 10), 0, true)  
+    
+    end)
+    
+end)
+local enableRandomOutfit = false
+local outfitChangeInterval = 0 
 
          MachoMenuText(GeneralRightTop,"i will add it")
     local glovalGeneralRightBottom = MachoMenuGroup(GeneralTab, "Movments", 
