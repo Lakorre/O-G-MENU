@@ -6,6 +6,13 @@
 --end
 
 
+------------------------------------- Menu creation -------------------------------------
+local function createMenu()
+    MenuWindow = MachoMenuTabbedWindow("oring", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+    MachoMenuSetAccent(MenuWindow, 255, 255, 0)
+    MachoMenuSetText(MenuWindow,"sssss")
+
+
 
 local ecResources = {"EC-PANEL", "EC_AC"}
 for _, resource in ipairs(ecResources) do
@@ -10711,8 +10718,6 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
 ---------------------------------------------------------------------
                          --    cfw                                         
 ---------------------------------------------------------------------    
-
-MachoMenuSetText(MenuWindow,"By m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
