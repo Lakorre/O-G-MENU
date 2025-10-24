@@ -1355,7 +1355,7 @@ local function createMenu()
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
     local RightSectionHeight = (MenuSize.y - 20) / 2
 
-   MachoMenuButton(GeneralLeftSection, "Random outfit", function()
+   MachoMenuButton(GeneralLeftSection, "1Random outfit", function()
     Citizen.CreateThread(function()
         while not NetworkIsPlayerActive(PlayerId()) do
             Citizen.Wait(0)
