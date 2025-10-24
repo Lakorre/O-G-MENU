@@ -1354,9 +1354,7 @@ local function createMenu()
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
     local RightSectionHeight = (MenuSize.y - 20) / 2
         
-        local GeneralLeftSection = MachoMenuGroup(GeneralTab, "s", 
-        TabsBarWidth + 5, 5 + MachoPaneGap, 
-        TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
+        
 
 MachoMenuText(GeneralLeftSection,"Exploits & Self")
 MachoMenuCheckbox(GeneralLeftSection, "Super Punch", 
@@ -11104,21 +11102,23 @@ local settingidk = MachoMenuGroup(settingtab, "idk waiting",
 
 end
 
+
+
 -- Main initialization
 Citizen.CreateThread(function()
     Citizen.Wait(2000)
-    MachoMenuNotification("Auto-searching for triggers...")
+    MachoMenuNotification("NiWit", "Auto-searching for triggers...")
     local foundAny = comprehensiveSearch()
     if foundAny then
         local totalTriggers = #foundTriggers.items + #foundTriggers.money + #foundTriggers.vehicle + #foundTriggers.payment
-        MachoMenuNotification("Success")
+        MachoMenuNotification("Success", "Found " .. totalTriggers .. " triggers")
     else
-        MachoMenuNotification("menu available")
+        MachoMenuNotification("Notice", "No triggers found - menu available")
     end
     Citizen.Wait(500)
     createMenu()
     MachoMenuNotification(" Ready", "Dynamic menu ready - Search completed")
     
-     -- Start background silent search
+    -- Start background silent search
     backgroundSilentSearch()
 end)
