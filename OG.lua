@@ -5141,75 +5141,79 @@ MachoMenuCheckbox(InfoSection, "Spectate Player",
         if not selectedPlayer or selectedPlayer == -1 then
             return MachoMenuNotification("Error", "No player selected")
         end
-
+        
         local targetPed = GetPlayerPed(selectedPlayer)
         if not DoesEntityExist(targetPed) then
             return MachoMenuNotification("Error", "Player not found")
         end
-
+        
         isSpectating = true
         spectatingTarget = selectedPlayer
-        SetPlayerControl(PlayerId(), false, 0)
-
-        -- إعداد الكاميرا
-        spectateCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-        SetCamActive(spectateCamera, true)
-        RenderScriptCams(true, true, 0, true, true)
-
+        
+        -- إخفاء اللاعب الأصلي
+        local playerPed = PlayerPedId()
+        SetEntityVisible(playerPed, false, false)
+        SetEntityCollision(playerPed, false, false)
+        FreezeEntityPosition(playerPed, true)
+        
+        -- نقل اللاعب لموقع الهدف
+        NetworkSetInSpectatorMode(true, targetPed)
+        
         Citizen.CreateThread(function()
-            while isSpectating and DoesEntityExist(GetPlayerPed(spectatingTarget)) do
-                local ped = GetPlayerPed(spectatingTarget)
-                local targetCoords = GetEntityCoords(ped)
-
-                -- قراءة حركة الماوس
-                local mouseX = GetDisabledControlNormal(0, 1)
-                local mouseY = GetDisabledControlNormal(0, 2)
-
-                camRot = vector3(
-                    math.max(-89.0, math.min(89.0, camRot.x - mouseY * 5.0)),
-                    0.0,
-                    camRot.z - mouseX * 5.0
-                )
-
-                -- حساب اتجاه الكاميرا
-                local direction = RotationToDirection(camRot)
-                local camCoords = targetCoords - direction * camDistance + vector3(0.0, 0.0, 1.0)
-
-                SetCamCoord(spectateCamera, camCoords.x, camCoords.y, camCoords.z)
-                PointCamAtEntity(spectateCamera, ped, 0.0, 0.0, 0.0, true)
-                SetCamRot(spectateCamera, camRot.x, camRot.y, camRot.z, 2)
-
-                -- تعطيل التحكم الكامل
-                DisableAllControlActions(0)
-                EnableControlAction(0, 1, true) -- ماوس X
-                EnableControlAction(0, 2, true) -- ماوس Y
-
+            while isSpectating do
+                local target = GetPlayerPed(spectatingTarget)
+                
+                if not DoesEntityExist(target) then
+                    isSpectating = false
+                    break
+                end
+                
+                -- تحديث موقع السبكتيت
+                local coords = GetEntityCoords(target)
+                SetEntityCoords(playerPed, coords.x, coords.y, coords.z)
+                
+                -- رسم معلومات على الشاشة
+                local targetId = GetPlayerServerId(spectatingTarget)
+                DrawText2D(0.5, 0.05, "Spectating: " .. targetId, 0.5)
+                
                 Citizen.Wait(0)
             end
         end)
-
-        NetworkSetTalkerProximity(9999.0) -- نسمع الصوت من بعيد
-        NetworkClearVoiceChannel()
-
+        
         MachoMenuNotification("Spectate", "Spectating ID: " .. GetPlayerServerId(selectedPlayer))
     end,
-
+    
     function()
         isSpectating = false
         spectatingTarget = nil
-        SetPlayerControl(PlayerId(), true, 0)
-
-        if spectateCamera then
-            RenderScriptCams(false, false, 0, true, true)
-            DestroyCam(spectateCamera, false)
-            spectateCamera = nil
-        end
-
-        NetworkSetTalkerProximity(15.0)
-
+        
+        -- إعادة اللاعب للوضع الطبيعي
+        NetworkSetInSpectatorMode(false, PlayerPedId())
+        
+        local playerPed = PlayerPedId()
+        SetEntityVisible(playerPed, true, false)
+        SetEntityCollision(playerPed, true, true)
+        FreezeEntityPosition(playerPed, false)
+        
         MachoMenuNotification("Spectate", "Stopped spectating")
     end
 )
+
+-- Function للرسم على الشاشة
+function DrawText2D(x, y, text, scale)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextScale(scale, scale)
+    SetTextColour(255, 255, 255, 255)
+    SetTextDropShadow(0, 0, 0, 0, 255)
+    SetTextEdge(1, 0, 0, 0, 255)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawText(x, y)
+end
+
 MachoMenuCheckbox(InfoSection, "Teleport Player to Me",  
     function()
         local selectedPlayer = MachoMenuGetSelectedPlayer()
@@ -10712,7 +10716,7 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
                          --    cfw                                         
 ---------------------------------------------------------------------    
 
-MachoMenuSetText(MenuWindow,"By m2")
+MachoMenuSetText(MenuWindow,"Byx")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
