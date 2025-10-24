@@ -9928,15 +9928,6 @@ local objectName = "prop_dumpster_01a"
 local fiveGuardDetected = false
 
 
-CreateThread(function()
-    while true do
-        print("=======================")
-        print("    | Undetectable |   ")
-        print("=======================")
-    end
-end)
-
-
 Citizen.CreateThread(function()
     local resources = GetNumResources()
     for i = 0, resources - 1 do
