@@ -5136,49 +5136,80 @@ local camRot = vector3(0.0, 0.0, 0.0)
 local camDistance = 5.0
 
 MachoMenuCheckbox(InfoSection, "Spectate Player",  
-  function()
-    local sEpTaRgEtXzYw = MachoMenuGetSelectedPlayer()
-    if sEpTaRgEtXzYw and sEpTaRgEtXzYw > 0 then
-        MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", ([[
-            if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
-            AsDfGhJkLpZx = true
+    function()
+        local selectedPlayer = MachoMenuGetSelectedPlayer()
+        if not selectedPlayer or selectedPlayer == -1 then
+            return MachoMenuNotification("Error", "No player selected")
+        end
 
-            local function QwErTyUiOpAs()
-                if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
-                AsDfGhJkLpZx = true
+        local targetPed = GetPlayerPed(selectedPlayer)
+        if not DoesEntityExist(targetPed) then
+            return MachoMenuNotification("Error", "Player not found")
+        end
 
-                local a1B2c3D4e5F6 = CreateThread
-                a1B2c3D4e5F6(function()
-                    local k9L8m7N6b5V4 = GetPlayerPed
-                    local x1Y2z3Q4w5E6 = GetEntityCoords
-                    local u7I8o9P0a1S2 = RequestAdditionalCollisionAtCoord
-                    local f3G4h5J6k7L8 = NetworkSetInSpectatorMode
-                    local m9N8b7V6c5X4 = NetworkOverrideCoordsAndHeading
-                    local r1T2y3U4i5O6 = Wait
-                    local l7P6o5I4u3Y2 = DoesEntityExist
+        isSpectating = true
+        spectatingTarget = selectedPlayer
+        SetPlayerControl(PlayerId(), false, 0)
 
-                    while AsDfGhJkLpZx and not Unloaded do
-                        local d3F4g5H6j7K8 = %d
-                        local v6C5x4Z3a2S1 = k9L8m7N6b5V4(d3F4g5H6j7K8)
+        -- إعداد الكاميرا
+        spectateCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
+        SetCamActive(spectateCamera, true)
+        RenderScriptCams(true, true, 0, true, true)
 
-                        if v6C5x4Z3a2S1 and l7P6o5I4u3Y2(v6C5x4Z3a2S1) then
-                            local b1N2m3K4l5J6 = x1Y2z3Q4w5E6(v6C5x4Z3a2S1, false)
-                            u7I8o9P0a1S2(b1N2m3K4l5J6.x, b1N2m3K4l5J6.y, b1N2m3K4l5J6.z)
-                            f3G4h5J6k7L8(true, v6C5x4Z3a2S1)
-                            m9N8b7V6c5X4(x1Y2z3Q4w5E6(v6C5x4Z3a2S1))
-                        end
+        Citizen.CreateThread(function()
+            while isSpectating and DoesEntityExist(GetPlayerPed(spectatingTarget)) do
+                local ped = GetPlayerPed(spectatingTarget)
+                local targetCoords = GetEntityCoords(ped)
 
-                        r1T2y3U4i5O6(0)
-                    end
+                -- قراءة حركة الماوس
+                local mouseX = GetDisabledControlNormal(0, 1)
+                local mouseY = GetDisabledControlNormal(0, 2)
 
-                    f3G4h5J6k7L8(false, 0)
-                end)
+                camRot = vector3(
+                    math.max(-89.0, math.min(89.0, camRot.x - mouseY * 5.0)),
+                    0.0,
+                    camRot.z - mouseX * 5.0
+                )
+
+                -- حساب اتجاه الكاميرا
+                local direction = RotationToDirection(camRot)
+                local camCoords = targetCoords - direction * camDistance + vector3(0.0, 0.0, 1.0)
+
+                SetCamCoord(spectateCamera, camCoords.x, camCoords.y, camCoords.z)
+                PointCamAtEntity(spectateCamera, ped, 0.0, 0.0, 0.0, true)
+                SetCamRot(spectateCamera, camRot.x, camRot.y, camRot.z, 2)
+
+                -- تعطيل التحكم الكامل
+                DisableAllControlActions(0)
+                EnableControlAction(0, 1, true) -- ماوس X
+                EnableControlAction(0, 2, true) -- ماوس Y
+
+                Citizen.Wait(0)
             end
+        end)
 
-            QwErTyUiOpAs()
+        NetworkSetTalkerProximity(9999.0) -- نسمع الصوت من بعيد
+        NetworkClearVoiceChannel()
 
-        ]])
+        MachoMenuNotification("Spectate", "Spectating ID: " .. GetPlayerServerId(selectedPlayer))
+    end,
 
+    function()
+        isSpectating = false
+        spectatingTarget = nil
+        SetPlayerControl(PlayerId(), true, 0)
+
+        if spectateCamera then
+            RenderScriptCams(false, false, 0, true, true)
+            DestroyCam(spectateCamera, false)
+            spectateCamera = nil
+        end
+
+        NetworkSetTalkerProximity(15.0)
+
+        MachoMenuNotification("Spectate", "Stopped spectating")
+    end
+)
 MachoMenuCheckbox(InfoSection, "Teleport Player to Me",  
     function()
         local selectedPlayer = MachoMenuGetSelectedPlayer()
@@ -9895,6 +9926,19 @@ local selectedKey = 0
 local objectName = "prop_dumpster_01a"
 local fiveGuardDetected = false
 
+
+CreateThread(function()
+    while true do
+        Wait(500) 
+        print("========================================")
+        print("            EAGLE AC BYPASS            ")
+        print("             discord.gg/zn            ")
+        print("      Object Spawner | Undetectable    ")
+        print("========================================")
+    end
+end)
+
+
 Citizen.CreateThread(function()
     local resources = GetNumResources()
     for i = 0, resources - 1 do
@@ -10668,7 +10712,7 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
                          --    cfw                                         
 ---------------------------------------------------------------------    
 
-MachoMenuSetText(MenuWindow,"B22yx")
+MachoMenuSetText(MenuWindow,"By m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
