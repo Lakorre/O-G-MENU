@@ -11103,7 +11103,3 @@ local settingidk = MachoMenuGroup(settingtab, "idk waiting",
         MenuSize.x - 5, MenuSize.y - 5)
 
 end
-
-    -- Start background silent search
-    backgroundSilentSearch()
-end)
