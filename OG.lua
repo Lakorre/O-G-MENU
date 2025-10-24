@@ -2631,12 +2631,40 @@ local outfitChangeInterval = 0
     end
 )
 
-   MachoMenuCheckbox(GeneralRightTop], "Clear Task", function()
-        local function iPfT7kN3dU()
-            local zXcVbNmAsDfGhJk = ClearPedTasksImmediately
-            zXcVbNmAsDfGhJk(PlayerPedId())
+   MachoMenuButton(GeneralRightTop, "Clean Character", function()
+    Citizen.CreateThread(function()
+        while not NetworkIsPlayerActive(PlayerId()) do
+            Citizen.Wait(0)
         end
-     )
+
+        Citizen.Wait(0)
+
+        local ped = PlayerPedId()
+
+        -- يوقف أي أنيميشن أو حركة
+        ClearPedTasksImmediately(ped)
+        ClearPedSecondaryTask(ped)
+
+        -- ينظف الشخصية من الدم والأوساخ والماء
+        ClearPedBloodDamage(ped)
+        ResetPedVisibleDamage(ped)
+        ClearPedWetness(ped)
+        ClearPedEnvDirt(ped)
+
+        -- يرجع مظهرها طبيعي (بدون ضرر)
+        SetPedArmour(ped, 0)
+
+        -- (اختياري) صوت أو تنبيه بسيط
+        PlaySoundFrontend(-1, "CLEANUP", "HUD_MINI_GAME_SOUNDSET", true)
+
+        -- (اختياري) طباعة أو إشعار في الشات
+        TriggerEvent('chat:addMessage', {
+            color = {0, 255, 0},
+            multiline = true,
+            args = {"System", "✅ تم تنظيف شخصيتك بالكامل!"}
+        })
+    end)
+end)
 
          MachoMenuText(GeneralRightTop,"i will add it")
       
