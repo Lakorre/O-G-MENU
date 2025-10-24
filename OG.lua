@@ -5136,115 +5136,47 @@ local camRot = vector3(0.0, 0.0, 0.0)
 local camDistance = 5.0
 
 MachoMenuCheckbox(InfoSection, "Spectate Player",  
-    function()
-        local selectedPlayer = MachoMenuGetSelectedPlayer()
-        if not selectedPlayer or selectedPlayer == -1 then
-            return MachoMenuNotification("Error", "No player selected")
-        end
-        
-        local targetPed = GetPlayerPed(selectedPlayer)
-        if not DoesEntityExist(targetPed) then
-            return MachoMenuNotification("Error", "Player not found")
-        end
-        
-        isSpectating = true
-        spectatingTarget = selectedPlayer
-        
-        -- إخفاء اللاعب
-        local playerPed = PlayerPedId()
-        SetEntityVisible(playerPed, false, false)
-        SetEntityCollision(playerPed, false, false)
-        
-        -- Reset camera rotation
-        camRot = vector3(-10.0, 0.0, 0.0)
-        
-        -- إنشاء الكاميرا
-        spectateCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-        SetCamActive(spectateCamera, true)
-        RenderScriptCams(true, false, 0, true, true)
-        
-        -- Thread للكاميرا
-        Citizen.CreateThread(function()
-            while isSpectating do
-                if not DoesEntityExist(GetPlayerPed(spectatingTarget)) then
-                    isSpectating = false
-                    break
-                end
-                
-                local targetPed = GetPlayerPed(spectatingTarget)
-                local targetCoords = GetEntityCoords(targetPed)
-                
-                -- قراءة حركة الماوس
-                local mouseX = GetDisabledControlNormal(0, 1) -- Mouse X
-                local mouseY = GetDisabledControlNormal(0, 2) -- Mouse Y
-                
-                -- تحديث زاوية الكاميرا
-                camRot = vector3(
-                    math.max(-89.0, math.min(89.0, camRot.x - mouseY * 8.0)),
-                    0.0,
-                    camRot.z - mouseX * 8.0
-                )
-                
-                -- Zoom In/Out بالسكرول
-                if IsDisabledControlPressed(0, 241) then -- Scroll Up
-                    camDistance = math.max(1.0, camDistance - 0.5)
-                end
-                if IsDisabledControlPressed(0, 242) then -- Scroll Down
-                    camDistance = math.min(15.0, camDistance + 0.5)
-                end
-                
-                -- حساب موقع الكاميرا
-                local direction = RotationToDirection(camRot)
-                local camCoords = targetCoords - (direction * camDistance) + vector3(0.0, 0.0, 0.5)
-                
-                -- تحديث الكاميرا
-                SetCamCoord(spectateCamera, camCoords.x, camCoords.y, camCoords.z)
-                SetCamRot(spectateCamera, camRot.x, camRot.y, camRot.z, 2)
-                
-                -- رسم معلومات
-                local serverId = GetPlayerServerId(spectatingTarget)
-                DrawText2D(0.5, 0.02, "~b~Spectating ID: ~w~" .. serverId, 0.5)
-                DrawText2D(0.5, 0.06, "~y~Scroll: ~w~Zoom | ~y~ESC: ~w~Exit", 0.4)
-                
-                -- تعطيل كل التحكم ما عدا الماوس
-                DisableAllControlActions(0)
-                EnableControlAction(0, 1, true)  -- Mouse X
-                EnableControlAction(0, 2, true)  -- Mouse Y
-                EnableControlAction(0, 241, true) -- Scroll Up
-                EnableControlAction(0, 242, true) -- Scroll Down
-                
-                Citizen.Wait(0)
+    local sEpTaRgEtXzYw = MachoMenuGetSelectedPlayer()
+    if sEpTaRgEtXzYw and sEpTaRgEtXzYw > 0 then
+        MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", ([[
+            if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
+            AsDfGhJkLpZx = true
+
+            local function QwErTyUiOpAs()
+                if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
+                AsDfGhJkLpZx = true
+
+                local a1B2c3D4e5F6 = CreateThread
+                a1B2c3D4e5F6(function()
+                    local k9L8m7N6b5V4 = GetPlayerPed
+                    local x1Y2z3Q4w5E6 = GetEntityCoords
+                    local u7I8o9P0a1S2 = RequestAdditionalCollisionAtCoord
+                    local f3G4h5J6k7L8 = NetworkSetInSpectatorMode
+                    local m9N8b7V6c5X4 = NetworkOverrideCoordsAndHeading
+                    local r1T2y3U4i5O6 = Wait
+                    local l7P6o5I4u3Y2 = DoesEntityExist
+
+                    while AsDfGhJkLpZx and not Unloaded do
+                        local d3F4g5H6j7K8 = %d
+                        local v6C5x4Z3a2S1 = k9L8m7N6b5V4(d3F4g5H6j7K8)
+
+                        if v6C5x4Z3a2S1 and l7P6o5I4u3Y2(v6C5x4Z3a2S1) then
+                            local b1N2m3K4l5J6 = x1Y2z3Q4w5E6(v6C5x4Z3a2S1, false)
+                            u7I8o9P0a1S2(b1N2m3K4l5J6.x, b1N2m3K4l5J6.y, b1N2m3K4l5J6.z)
+                            f3G4h5J6k7L8(true, v6C5x4Z3a2S1)
+                            m9N8b7V6c5X4(x1Y2z3Q4w5E6(v6C5x4Z3a2S1))
+                        end
+
+                        r1T2y3U4i5O6(0)
+                    end
+
+                    f3G4h5J6k7L8(false, 0)
+                end)
             end
-        end)
-        
-        -- تمكين سماع الصوت من بعيد
-        NetworkSetTalkerProximity(9999.0)
-        
-        MachoMenuNotification("Spectate", "Spectating ID: " .. GetPlayerServerId(selectedPlayer))
-    end,
-    
-    function()
-        isSpectating = false
-        spectatingTarget = nil
-        
-        -- إيقاف الكاميرا
-        if spectateCamera then
-            RenderScriptCams(false, false, 0, true, true)
-            DestroyCam(spectateCamera, false)
-            spectateCamera = nil
-        end
-        
-        -- إظهار اللاعب
-        local playerPed = PlayerPedId()
-        SetEntityVisible(playerPed, true, false)
-        SetEntityCollision(playerPed, true, true)
-        
-        -- إعادة الصوت للوضع الطبيعي
-        NetworkSetTalkerProximity(15.0)
-        
-        MachoMenuNotification("Spectate", "Stopped spectating")
-    end
-)
+
+            QwErTyUiOpAs()
+
+        ]])
 
 MachoMenuCheckbox(InfoSection, "Teleport Player to Me",  
     function()
