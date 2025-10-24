@@ -1354,11 +1354,6 @@ local function createMenu()
     local LeftSectionWidth = (MenuSize.x - TabsBarWidth) * 0.5
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
     local RightSectionHeight = (MenuSize.y - 20) / 2
-
-
-    local GeneralLeftSection = MachoMenuGroup(GeneralTab, "looks & Outfits", 
-        TabsBarWidth + 5, 5 + MachoPaneGap, 
-        TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
         
 
 MachoMenuText(GeneralLeftSection,"Exploits & Self")
@@ -2586,7 +2581,7 @@ MachoMenuText(GeneralLeftSection,"Txadmin exploits")
         end
     )
 
-    local GeneralRightTop = MachoMenuGroup(GeneralTab, "fre2222222e cam", 
+    local GeneralRightTop = MachoMenuGroup(GeneralTab, "looks & Outfits", 
         TabsBarWidth + LeftSectionWidth + 10, 5 + MachoPaneGap, 
         MenuSize.x - 5, 5 + MachoPaneGap + RightSectionHeight)
 
@@ -2625,7 +2620,7 @@ end)
 local enableRandomOutfit = false
 local outfitChangeInterval = 0 
    
-   MachoMenuCheckbox(GeneralLeftSection, "Random Outfit Loop", 
+ MachoMenuCheckbox(GeneralLeftSection, "Random Outfit Loop", 
     function()
         enableRandomOutfit = true
     end,
