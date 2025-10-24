@@ -1354,7 +1354,7 @@ local function createMenu()
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
     local RightSectionHeight = (MenuSize.y - 20) / 2
         
-        local GeneralLeftSection = MachoMenuGroup(GeneralTab, "", 
+        local GeneralLeftSection = MachoMenuGroup(GeneralTab, "s", 
         TabsBarWidth + 5, 5 + MachoPaneGap, 
         TabsBarWidth + LeftSectionWidth, MenuSize.y - 5)
 
