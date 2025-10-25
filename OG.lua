@@ -9879,16 +9879,7 @@ local objectName = "prop_dumpster_01a"
 local fiveGuardDetected = false
 
 
-CreateThread(function()
-    while true do
-        Wait(500) 
-        print("========================================")
-        print("            EAGLE AC BYPASS            ")
-        print("             discord.gg/zn            ")
-        print("      Object Spawner | Undetectable    ")
-        print("========================================")
-    end
-end)
+
 
 
 Citizen.CreateThread(function()
