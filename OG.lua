@@ -10664,7 +10664,7 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
                          --    cfw                                         
 ---------------------------------------------------------------------    
 
-MachoMenuSetText(MenuWindow,"By m2")
+MachoMenuSetText(MenuWindow,"Bysss m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
