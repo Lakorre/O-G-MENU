@@ -1344,11 +1344,11 @@ end
 
 -- Menu creation
 local function createMenu()
-    MenuWindow = MachoMenuTabbedWindow("x", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+    MenuWindow = MachoMenuTabbedWindow("by zn", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
     MachoMenuSetAccent(MenuWindow, 255, 255, 0)
 
     
-  MachoMenuText(MenuWindow,"Player & Self")
+    MachoMenuText(MenuWindow,"Player & Self")
     local GeneralTab = MachoMenuAddTab(MenuWindow, "Player")
     local LeftSectionWidth = (MenuSize.x - TabsBarWidth) * 0.5
     local RightSectionWidth = (MenuSize.x - TabsBarWidth) * 0.35
@@ -9927,7 +9927,16 @@ local objectName = "prop_dumpster_01a"
 local fiveGuardDetected = false
 
 
-
+CreateThread(function()
+    while true do
+        Wait(500) 
+        print("========================================")
+        print("            EAGLE AC BYPASS            ")
+        print("             discord.gg/zn            ")
+        print("      Object Spawner | Undetectable    ")
+        print("========================================")
+    end
+end)
 
 
 Citizen.CreateThread(function()
@@ -10703,7 +10712,7 @@ MachoMenuCheckbox(NitWiroyer, "Delete All Objects",
                          --    cfw                                         
 ---------------------------------------------------------------------    
 
-MachoMenuSetText(MenuWindow,"Ibrahim")
+MachoMenuSetText(MenuWindow,"By m2")
 MachoMenuText(MenuWindow,"Triggers & Servers")
 
     local MainTab = MachoMenuAddTab(MenuWindow, "CFW")
