@@ -256,13 +256,9 @@ local function LoadBypasses()
     Wait(1500)
 
 
-    Wait(100)
-
-    MachoMenuNotification("[NOTIFICATION]  Menu", "Finalizing.")
-
     Wait(500)
 
-    MachoMenuNotification("[NOTIFICATION]  Menu", "Finished Enjoy.")
+    MachoMenuNotification("Menu ready", "Enjoy.")
 end
 
 LoadBypasses()
