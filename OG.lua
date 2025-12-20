@@ -5335,19 +5335,47 @@ local vehicleInputBox = MachoMenuInputbox(
     "Enter Player id..."
 )
 
-MachoMenuButton(VIPTabSections[2], "R1evive", function()
-    -- استخدم نفس اسم الـ Inputbox
-    local text = reviveInputBox:GetValue()
-    local targetId = tonumber(text)
+-- ======================================
+-- نظام إنعاش اللاعبين - FiveM
+-- ======================================
 
-    if not targetId then
-        MachoMenuNotification("Error", "Enter a valid player ID")
+-- إنشاء Inputbox لإدخال ID اللاعب
+local reviveInputBox = MachoMenuInputBox(VIPTabSections[2], "Enter Player ID", "Enter player id...")
+
+-- إنشاء زر الإنعاش
+MachoMenuButton(VIPTabSections[2], "Revive Player", function()
+    -- الحصول على القيمة من Inputbox
+    local text = reviveInputBox:GetValue()
+    
+    -- التحقق من أن الحقل غير فارغ
+    if not text or text == "" then
+        MachoMenuNotification("Error", "Please enter a player ID")
         return
     end
-
+    
+    -- تحويل النص إلى رقم
+    local targetId = tonumber(text)
+    
+    -- التحقق من صحة ID
+    if not targetId then
+        MachoMenuNotification("Error", "Enter a valid player ID (numbers only)")
+        return
+    end
+    
+    -- التحقق من أن ID إيجابي
+    if targetId < 0 then
+        MachoMenuNotification("Error", "Player ID must be positive")
+        return
+    end
+    
+    -- إرسال حدث الإنعاش للسيرفر
     TriggerServerEvent("hospital:server:RevivePlayer", targetId)
-
-    MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
+    
+    -- إظهار رسالة النجاح
+    MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
+    
+    -- مسح الحقل بعد الإرسال (اختياري)
+    -- reviveInputBox:SetValue("")
 end)
 
 MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
