@@ -1524,6 +1524,55 @@ MachoMenuCheckbox(VIPTabSections[2], "Invisible",
     end
 )
 
+-- Keybind للاختصار
+MachoMenuKeybind(VIPTabSections[2], "Invisible Key", 0, function(key, toggle)
+    selectedKey = key
+end)
+
+-- وظيفة الاختصار
+MachoOnKeyDown(function(key)
+    if key == selectedKey and selectedKey ~= 0 then
+        if not invisibilityLoop then
+            invisibilityLoop = true
+            MachoMenuNotification("Invisible", "Activated - Alpha: " .. invisibilityAlpha)
+            
+            CreateThread(function()
+                while invisibilityLoop do
+                    local playerPed = PlayerPedId()
+                    
+                    -- للآخرين: إخفاء كامل
+                    SetEntityVisible(playerPed, false, false)
+                    
+                    -- للكلاينت: جعل الشخصية مرئية محلياً
+                    SetEntityLocallyVisible(playerPed)
+                    
+                    -- تطبيق مستوى الشفافية
+                    if invisibilityAlpha == 0 then
+                        SetEntityAlpha(playerPed, 0, false)
+                    else
+                        SetEntityAlpha(playerPed, invisibilityAlpha, false)
+                    end
+                    
+                    Wait(0)
+                end
+                
+                -- إرجاع الشخصية للحالة الطبيعية عند الإلغاء
+                local playerPed = PlayerPedId()
+                SetEntityVisible(playerPed, true, false)
+                SetEntityAlpha(playerPed, 255, false)
+            end)
+        else
+            invisibilityLoop = false
+            MachoMenuNotification("Invisible", "Deactivated")
+            
+            -- إرجاع الشخصية للحالة الطبيعية
+            local playerPed = PlayerPedId()
+            SetEntityVisible(playerPed, true, false)
+            SetEntityAlpha(playerPed, 255, false)
+        end
+    end
+end)
+
 MachoMenuButton(VIPTabSections[2], "Randomize Outfit", function()
 MachoInjectResourceRaw("ox_lib", [[
                 CreateObject = function() end
