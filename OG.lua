@@ -5386,10 +5386,13 @@ MachoOnKeyDown(function(key)
     end
 end)
 
--- إعداد واجهة اختيار الزر
+-- إعداد واجهة اختيار الزر مع إضافة إشعار عند التغيير
 MachoMenuKeybind(VIPTabSections[2], "Menu Key", 0x14, function(key, toggle)
     selectedKey = key    -- تحديث الزر المختار
     MachoMenuSetKeybind(MenuWindow, selectedKey) -- تطبيق الزر المختار
+    
+    -- إضافة الإشعار هنا
+    MachoMenuNotification("Keybind Updated", "New Menu Key has been set!")
 end)
 
 -- تعيين الزر الافتراضي عند تحميل القائمة
