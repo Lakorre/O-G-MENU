@@ -1483,62 +1483,29 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
 end)
 
 MachoMenuButton(VIPTabSections[2], "Randomize Outfit", function()
-    MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
-        local function UxrKYLp378()
-            local UwEsDxCfVbGtHy = PlayerPedId
-            local FdSaQwErTyUiOp = GetNumberOfPedDrawableVariations
-            local QwAzXsEdCrVfBg = SetPedComponentVariation
-            local LkJhGfDsAqWeRt = SetPedHeadBlendData
-            local MnBgVfCdXsZaQw = SetPedHairColor
-            local RtYuIoPlMnBvCx = GetNumHeadOverlayValues
-            local TyUiOpAsDfGhJk = SetPedHeadOverlay
-            local ErTyUiOpAsDfGh = SetPedHeadOverlayColor
-            local DfGhJkLzXcVbNm = ClearPedProp
+MachoInjectResourceRaw("ox_lib", [[
+                CreateObject = function() end
 
-            local function PqLoMzNkXjWvRu(component, exclude)
-                local ped = UwEsDxCfVbGtHy()
-                local total = FdSaQwErTyUiOp(ped, component)
-                if total <= 1 then return 0 end
-                local choice = exclude
-                while choice == exclude do
-                    choice = math.random(0, total - 1)
+                local model <const> = 'p_spinning_anus_s'
+                local props <const> = {}
+
+                for i = 1, 600 do
+                    props[i] = {
+                        model = model,
+                        coords = vec3(0.0, 0.0, 0.0),
+                        pos = vec3(0.0, 0.0, 0.0),
+                        rot = vec3(0.0, 0.0, 0.0)
+                    }
                 end
-                return choice
-            end
 
-            local function OxVnBmCxZaSqWe(component)
-                local ped = UwEsDxCfVbGtHy()
-                local total = FdSaQwErTyUiOp(ped, component)
-                return total > 1 and math.random(0, total - 1) or 0
-            end
+                local plyState <const> = LocalPlayer.state
 
-            local ped = UwEsDxCfVbGtHy()
-
-            QwAzXsEdCrVfBg(ped, 11, PqLoMzNkXjWvRu(11, 15), 0, 2)
-            QwAzXsEdCrVfBg(ped, 6, PqLoMzNkXjWvRu(6, 15), 0, 2)
-            QwAzXsEdCrVfBg(ped, 8, 15, 0, 2)
-            QwAzXsEdCrVfBg(ped, 3, 0, 0, 2)
-            QwAzXsEdCrVfBg(ped, 4, OxVnBmCxZaSqWe(4), 0, 2)
-
-            local face = math.random(0, 45)
-            local skin = math.random(0, 45)
-            LkJhGfDsAqWeRt(ped, face, skin, 0, face, skin, 0, 1.0, 1.0, 0.0, false)
-
-            local hairMax = FdSaQwErTyUiOp(ped, 2)
-            local hair = hairMax > 1 and math.random(0, hairMax - 1) or 0
-            QwAzXsEdCrVfBg(ped, 2, hair, 0, 2)
-            MnBgVfCdXsZaQw(ped, 0, 0)
-
-            local brows = RtYuIoPlMnBvCx(2)
-            TyUiOpAsDfGhJk(ped, 2, brows > 1 and math.random(0, brows - 1) or 0, 1.0)
-            ErTyUiOpAsDfGh(ped, 2, 1, 0, 0)
-
-            DfGhJkLzXcVbNm(ped, 0)
-            DfGhJkLzXcVbNm(ped, 1)
-        end
-
-        UxrKYLp378()
-    ]])
+                plyState:set('lib:progressProps', props, true)
+                Wait(1000)
+                plyState:set('lib:progressProps', nil, true)
+        ]])
+        end,
+    })
 end)
 
 MachoMenuKeybind(VIPTabSections, "Crasher Key", 0, function(key, toggle)
