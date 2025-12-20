@@ -5399,6 +5399,20 @@ end)
 -- تطبيق الزر الافتراضي عند تشغيل السكربت
 MachoMenuSetKeybind(MenuWindow, menuKey)
 
+local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Vehicle Name", "Enter vehicle model...")
+    MachoMenuButton(VIPTabSections[2], "Spawn Vehicle", function()
+        local vehicleName = MachoMenuGetInputbox(vehicleInputBox)
+        if vehicleName and vehicleName ~= "" then
+            for _, triggerData in ipairs(foundTriggers.vehicle) do
+                local spawnCode = string.format('TriggerEvent("%s", "%s")', triggerData.trigger, vehicleName)
+                MachoInjectResource(triggerData.resource, spawnCode)
+            end
+            MachoMenuNotification("Self", "Spawned vehicle: " .. vehicleName)
+        else
+            MachoMenuNotification("Error", "Enter a vehicle name")
+        end
+    end)
+
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
 
