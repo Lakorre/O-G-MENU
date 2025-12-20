@@ -5184,31 +5184,6 @@ MachoMenuButton(EventTabSections[3], "Execute", function()
     end
 end)
 
--- VIP Tab
-ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
-            
-            -- ["coinShop"] = function()
-            --     MachoInjectResource("coinShop", [[
-            --         local function wafawhjaw5r7f()
-            --             if "]] .. ItemName .. [[" == "money" or "]] .. ItemName .. [[" == "bank" or "]] .. ItemName .. [[" == "black_money" then
-            --                 local itemData = {
-            --                     account = "]] .. ItemName .. [[",
-            --                     money = ]] .. ItemAmount .. [[
-            --                 }
-            --             else
-            --                 local itemData = {
-            --                     item = "]] .. ItemName .. [[",
-            --                     count = ]] .. ItemAmount .. [[
-            --                 }
-            --             end
-
-            --             lib.callback.await("bs:cs:giveItem", false, itemData)
-            --         end
-
-            --         wafawhjaw5r7f()
-            --     ]])
-            -- end,
-
             ["skirpz_drugplug"] = function()
                 MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
                     local function fawfafffsfzxfzx()
