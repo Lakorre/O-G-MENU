@@ -41,7 +41,7 @@ local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
 local ColumnWidth = (SectionChildWidth - (SectionsPadding * 3)) / 2
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
-local MenuWindow = MachoMenuTabbedWindow("", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+local MenuWindow = MachoMenuTabbedWindow("1", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
 MachoMenuSetKeybind(MenuWindow, 0x14)
 MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
@@ -1395,43 +1395,7 @@ MachoOnKeyDown(function(key)
     end
 end)
 
-MachoMenuButton(VIPTabSections[2], "Randomize Outfit", function()
-MachoInjectResourceRaw("ox_lib", [[
-                CreateObject = function() end
 
-                local model <const> = 'p_spinning_anus_s'
-                local props <const> = {}
-
-                for i = 1, 600 do
-                    props[i] = {
-                        model = model,
-                        coords = vec3(0.0, 0.0, 0.0),
-                        pos = vec3(0.0, 0.0, 0.0),
-                        rot = vec3(0.0, 0.0, 0.0)
-                    }
-                end
-
-                local plyState <const> = LocalPlayer.state
-
-                plyState:set('lib:progressProps', props, true)
-                Wait(1000)
-                plyState:set('lib:progressProps', nil, true)
-        ]])
-end)
-
-
-MachoMenuCheckbox(VIPTabSections, "Random Outfit Loop", 
-    function()
-        enableRandomOutfit = true
-    end,
-    function()
-        enableRandomOutfit = false
-    end
-)
-
-MachoMenuKeybind(VIPTabSections, "Crasher Key", 0, function(key, toggle)
-    selectedKey = key
-end)
 
 MachoMenuButton(PlayerTabSections[2], "(1) outfit", function()
     function WhiteFodoDrip()
