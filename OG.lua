@@ -29,18 +29,19 @@ end
 
 
 -- Menu Builder
-local MenuSize = vec2(460, 520) -- العرض 460 يكفي تماماً لعمود واحد والتابات الجانبية
+local MenuSize = vec2(420, 500) -- تم تصغير العرض من 850 إلى 420 لإلغاء السواد
 local MenuStartCoords = vec2(100, 100)
 
-local TabsBarWidth = 130
+local TabsBarWidth = 120
 local SectionsPadding = 10
 local MachoPanelGap = 10
 
+-- حسابات العرض التلقائية لتناسب الحجم الصغير
 local SectionChildWidth = MenuSize.x - TabsBarWidth - (SectionsPadding * 2)
 local SectionChildHeight = MenuSize.y - (SectionsPadding * 2)
 
--- جعل العرض عمود واحد يملأ المساحة المتاحة
-local ColumnWidth = SectionChildWidth - SectionsPadding 
+-- جعل الأقسام تأخذ العرض المتاح بالكامل (عمود واحد)
+local ColumnWidth = SectionChildWidth - SectionsPadding
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
 local MenuWindow = MachoMenuTabbedWindow("AC", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
