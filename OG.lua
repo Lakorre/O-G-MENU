@@ -5401,10 +5401,15 @@ MachoMenuSetKeybind(MenuWindow, menuKey)
 
 --
 
-local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Revive Player", "Enter Player id...")
-  MachoMenuButton(VIPTabSections[2], "Revive", function()
-    -- ملاحظة: الدالة الصحيحة هي GetInputboxValue
-    local text = MachoMenuGetInputboxValue(reviveInputBox)
+local vehicleInputBox = MachoMenuInputbox(
+    VIPTabSections[2],
+    "Revive Player",
+    "Enter Player id..."
+)
+
+MachoMenuButton(VIPTabSections[2], "Revive", function()
+    -- استخدم نفس اسم الـ Inputbox
+    local text = MachoMenuGetInputboxValue(vehicleInputBox)
     local targetId = tonumber(text)
 
     if not targetId then
@@ -5412,11 +5417,11 @@ local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Revive Player", "E
         return
     end
 
-    -- 🔴 هنا المكان اللي قلت عليه: (حط ايديك هنا)
     TriggerServerEvent("hospital:server:RevivePlayer", targetId)
 
     MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
 end)
+
 
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
