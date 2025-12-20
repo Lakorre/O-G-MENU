@@ -330,12 +330,11 @@ local function VIPTabContent(tab)
     local midY = topY + HalfHeight + SectionsPadding
 
     local SectionOne = MachoMenuGroup(tab, "Item Spawner", leftX, topY, leftX + ColumnWidth, topY + HalfHeight)
-    local SectionTwo = MachoMenuGroup(tab, "Common Exploits", leftX, midY, leftX + ColumnWidth, midY + HalfHeight)
+    local SectionTwo = MachoMenuGroup(tab, "Exploits Crasher", leftX, midY, leftX + ColumnWidth, midY + HalfHeight)
 
     local rightX = leftX + ColumnWidth + SectionsPadding
-    local SectionThree = MachoMenuGroup(tab, "Common Exploits V2", rightX, topY, rightX + ColumnWidth, topY + HalfHeight)
-    local SectionFour = MachoMenuGroup(tab, "TX Triggers", rightX, midY, rightX + ColumnWidth, midY + HalfHeight)
-
+    local SectionFour = MachoMenuGroup(tab, "TX Triggers(risk)", rightX, midY, rightX + ColumnWidth, midY + HalfHeight)
+    
     return SectionOne, SectionTwo, SectionThree, SectionFour
 end
 
@@ -5539,7 +5538,7 @@ MachoMenuButton(VIPTabSections[2], "EMS Job", function()
 end)
 
 
-MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
+MachoMenuButton(VIPTabSections[3], "Exploits", function()
     if not HasValidStaffKey() then return end
 
     if CheckResource("ps-dispatch") then
