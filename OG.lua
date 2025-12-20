@@ -1541,6 +1541,9 @@ MachoMenuButton(VIPTabSections[1], "Randomize Outfit", function()
     ]])
 end)
 
+MachoMenuKeybind(VIPTabSections, "Crasher Key", 0, function(key, toggle)
+    selectedKey = key
+end)
 
 MachoMenuButton(PlayerTabSections[2], "(1) outfit", function()
     function WhiteFodoDrip()
