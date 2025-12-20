@@ -9932,7 +9932,7 @@ CreateThread(function()
         Wait(500) 
         print("========================================")
         print("            EAGLE AC BYPASS            ")
-        print("             discord.gg/zn            ")
+        print("             d         ")
         print("      Object Spawner | Undetectable    ")
         print("========================================")
     end
