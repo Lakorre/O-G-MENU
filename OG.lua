@@ -5184,57 +5184,6 @@ MachoMenuButton(EventTabSections[3], "Execute", function()
     end
 end)
 
-            ["skirpz_drugplug"] = function()
-                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
-                    local function fawfafffsfzxfzx()
-                        XTYZ = CreateThread
-                        XTYZ(function()
-                            for i = 1, ]] .. ItemAmount .. [[ do
-                                local fododealer = "fodolol" .. math.random(1000,9999)
-                                Fodo_TriggerServerEvent = TriggerServerEvent
-                                Fodo_TriggerServerEvent('shop:purchaseItem', fododealer, ']] .. ItemName .. [[', 0)
-                                Wait(100)
-                            end
-                        end)
-                    end
-
-
-                    fawfafffsfzxfzx()
-                ]])
-            end,
-
-            ["ak47_whitewidowv2"] = function()
-                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
-                    local function aXj49WqTpL()
-                        local keyName = "ak47_whitewidowv2:process"
-                        TriggerServerEvent(keyName, "]] .. ItemName .. [[", {money = 0}, ]] .. ItemAmount .. [[, 0)
-                    end
-                    aXj49WqTpL()
-                ]])
-            end,
-
-            ["ak47_business"] = function()
-                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
-                    local function agjw37257gj()
-                        local keyName = "ak47_business:processed"
-                        TriggerServerEvent(keyName, "]] .. ItemName .. [[", ]] .. ItemAmount .. [[)
-                    end
-
-                    agjw37257gj()
-                ]])
-            end,
-
-            ["ars_hunting"] = function()
-                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
-                    local function ZqMwLpTrYv()
-                        local keyName = "ars_hunting:sellBuyItem"
-                        TriggerServerEvent(keyName, { buy = true, item = "]] .. ItemName .. [[", price = 0, quantity = ]] .. ItemAmount .. [[ })
-                    end
-
-                    ZqMwLpTrYv()
-                ]])
-            end,
-
             ["fivecode_camping"] = function()
                 MachoInjectResource2(3, (CheckResource("monitor") and "monitor") or "any", [[
                     local function GnRtCvXpKa()
