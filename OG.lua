@@ -5484,7 +5484,7 @@ MachoOnKeyDown(function(key)
     -- التحقق أن الزر المضغوط هو نفسه الذي اخترته وأنك قمت باختيار زر فعلاً
     if selectedKey ~= 0 and key == selectedKey then
         
-        MachoMenuNotification("Crasher", "Executing Trigger...")
+        MachoMenuNotification("Okay baby", "Crashed❤️")
 
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
