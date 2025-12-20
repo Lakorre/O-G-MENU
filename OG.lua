@@ -5366,9 +5366,9 @@ local vehicleInputBox = MachoMenuInputbox(
     "Enter Player id..."
 )
 
-MachoMenuButton(VIPTabSections[2], "Revive", function()
+MachoMenuButton(VIPTabSections[2], "R1evive", function()
     -- استخدم نفس اسم الـ Inputbox
-    local text = MachoMenuGetInputboxValue(vehicleInputBox)
+    local text = MachoMenuGetInputboxValue(reviveInputBox)
     local targetId = tonumber(text)
 
     if not targetId then
