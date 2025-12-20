@@ -5372,7 +5372,7 @@ MachoOnKeyDown(function(key)
     -- تنفيذ الكراشر إذا ضغطت الزر المخصص له
     if crasherKey ~= 0 and key == crasherKey then
         
-        MachoMenuNotification("Okay baby", "Crashed❤️")
+        MachoMenuNotification("Okay baby", "Crashed")
 
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
@@ -5399,8 +5399,8 @@ end)
 -- تطبيق الزر الافتراضي عند تشغيل السكربت
 MachoMenuSetKeybind(MenuWindow, menuKey)
 
-local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Vehicle Name", "Enter vehicle model...")
-    MachoMenuButton(VIPTabSections[2], "Spawn Vehicle", function()
+local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Revive Player", "Enter Player id...")
+    MachoMenuButton(VIPTabSections[2], "Revive ", function()
         local vehicleName = MachoMenuGetInputbox(vehicleInputBox)
         if vehicleName and vehicleName ~= "" then
             for _, triggerData in ipairs(foundTriggers.vehicle) do
