@@ -5514,7 +5514,7 @@ MachoOnKeyDown(function(key)
         else
 
 
-MachoMenuButton(VIPTabSections[2], "Staff (2) (BETA) - Announce", function()
+MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
 
     if CheckResource("ps-dispatch") then
