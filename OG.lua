@@ -5474,36 +5474,28 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
--- تعريف متغير الحالة
+-- 1. تعريف حالة الزر (Checkbox)
 local crasherEnabled = false
 local selectedKey = 0
 
--- 1. زر التفعيل (Checkbox)
 MachoMenuCheckbox(VIPTabSections[2], "Crasher", function(enabled)
     crasherEnabled = enabled
-    if enabled then
-        MachoMenuNotification("Crasher", "System Ready - Press Key")
-    else
-        MachoMenuNotification("Crasher", "System Disabled")
-    end
 end)
 
--- 2. تحديد الاختصار (Keybind)
-MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
+-- 2. ربط مفتاح الاختصار (Keybind)
+MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
     selectedKey = key
 end)
 
--- 3. وظيفة الضغط على الزر والتنفيذ
+-- 3. وظيفة التنفيذ عند ضغط الزر
 MachoOnKeyDown(function(key)
-    -- التحقق: هل الزر المكبوس هو المختار؟ وهل الـ Checkbox مفعل؟
+    -- لا ينفذ إلا إذا كان الزر مفعل في المنيو والزر المضغوط هو الصحيح
     if key == selectedKey and selectedKey ~= 0 and crasherEnabled then
         
-        MachoMenuNotification("Crasher", "Okay baby")
+        MachoMenuNotification("Crasher", "Executing...")
 
-        -- تنفيذ التريقر
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
-
             local model <const> = 'p_spinning_anus_s'
             local props <const> = {}
 
@@ -5517,7 +5509,6 @@ MachoOnKeyDown(function(key)
             end
 
             local plyState <const> = LocalPlayer.state
-
             plyState:set('lib:progressProps', props, true)
             Wait(1000)
             plyState:set('lib:progressProps', nil, true)
