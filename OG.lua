@@ -334,9 +334,7 @@ local function VIPTabContent(tab)
     local SectionTwo = MachoMenuGroup(tab, "Common Exploits", leftX, midY, leftX + ColumnWidth, midY + HalfHeight)
 
     local rightX = leftX + ColumnWidth + SectionsPadding
-    local SectionThree = MachoMenuGroup(tab, "Common Exploits V2", rightX, topY, rightX + ColumnWidth, topY + HalfHeight)
-    local SectionFour = MachoMenuGroup(tab, "TX Triggers", rightX, midY, rightX + ColumnWidth, midY + HalfHeight)
-
+    
     return SectionOne, SectionTwo, SectionThree, SectionFour
 end
 
