@@ -1482,7 +1482,7 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
     end
 end)
 
-MachoMenuButton(VIPTabSections[1], "Randomize Outfit", function()
+MachoMenuButton(VIPTabSections[2], "Randomize Outfit", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function UxrKYLp378()
             local UwEsDxCfVbGtHy = PlayerPedId
