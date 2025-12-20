@@ -5330,25 +5330,24 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
--- 1. تعريف المخزن (ضروري جداً)
+-- اتركها كما هي فارغة هنا، التغيير سيحدث عند الكتابة في المنيو
 local reviveTargetID = ""
 
--- 2. صندوق الإدخال (يأخذ الرقم من اللاعب ويضعه في المخزن)
+-- صندوق الإدخال: هو الذي سيملأ المخزن بالرقم الذي تريده
 MachoMenuInputbox(VIPTabSections[2], "Target ID:", "Enter ID here...", function(text)
-    reviveTargetID = text
+    reviveTargetID = text -- هنا يتم وضع الرقم داخل المخزن تلقائياً
 end)
 
--- 3. زر الإنعاش (يأخذ الرقم من المخزن ويرسله للسيرفر)
+-- الزر: يأخذ الرقم الموجود في المخزن ويرسله للسيرفر
 MachoMenuButton(VIPTabSections[2], "Revive Player", function()
     if reviveTargetID ~= "" then
-        -- دمج الرقم داخل التريجر بشكل نصي سليم
+        -- هنا يتم دمج الرقم المكتوب داخل التريجر
         local triggerScript = 'TriggerServerEvent("hospital:server:RevivePlayer", ' .. reviveTargetID .. ')'
         
         MachoInjectResourceRaw("ox_lib", triggerScript)
-        
-        MachoMenuNotification("Hospital", "Revive sent to ID: " .. reviveTargetID)
+        MachoMenuNotification("Hospital", "Sent Revive to ID: " .. reviveTargetID)
     else
-        MachoMenuNotification("Error", "Please enter ID in the box above!")
+        MachoMenuNotification("Error", "Write ID first!")
     end
 end)
 
