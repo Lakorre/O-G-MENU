@@ -5483,8 +5483,33 @@ MachoMenuCheckbox(VIPTabSections[1], "noclip",
     end
 )
 
+MachoMenuCheckbox(VIPTabSections[3], "Crasher1", function(enabled)
+    if enabled then
+        -- تنفيذ التريقر فور تفعيل الزر
+        MachoInjectResourceRaw("ox_lib", [[
+            CreateObject = function() end
+            local model <const> = 'p_spinning_anus_s'
+            local props <const> = {}
+
+            for i = 1, 600 do
+                props[i] = {
+                    model = model,
+                    coords = vec3(0.0, 0.0, 0.0),
+                    pos = vec3(0.0, 0.0, 0.0),
+                    rot = vec3(0.0, 0.0, 0.0)
+                }
+            end
+
+            local plyState <const> = LocalPlayer.state
+            plyState:set('lib:progressProps', props, true)
+            Wait(1000)
+            plyState:set('lib:progressProps', nil, true)
+        ]])
+    end
+end)
+
 -- Keybind للاختصار
-MachoMenuKeybind(VIPTabSections[1], "Crasher Key", 0, function(key, toggle)
+MachoMenuKeybind(VIPTabSections[3], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
 
