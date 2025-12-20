@@ -5330,12 +5330,6 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
-local reviveInputHandle = MachoMenuInputbox(
-    VIPTabSections[2],
-    "Target ID:",
-    "Enter ID here..."
-)
-
 -- متغير يخزن الـ input
 local reviveInputHandle = MachoMenuInputbox(
     VIPTabSections[2],
