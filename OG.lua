@@ -5511,29 +5511,38 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
-MachoMenuButton(VIPTabSections[2], "Police Job", function()
-    if not HasValidKey() then return end
-
-    if CheckResource("wasabi_multijob") then
-        MachoInjectResource("wasabi_multijob", [[
-            local job = { label = "Police", name = "police", grade = 1, grade_label = "Officer", grade_name = "officer" }
-            CheckJob(job, true) 
-        ]])
-    else
-        MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Resource Not Found.")
-    end
+-- Keybind للاختصار
+MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
+    selectedKey = key
 end)
 
-MachoMenuButton(VIPTabSections[2], "EMS Job", function()
-    if not HasValidKey() then return end
+MachoOnKeyDown(function(key)
+    if key == selectedKey and selectedKey ~= 0 then
+        -- إرسال إشعار بالتنفيذ
+        MachoMenuNotification("Okay baby")
 
-    if CheckResource("wasabi_multijob") then
-        MachoInjectResource("wasabi_multijob", [[
-            local job = { label = "EMS", name = "ambulance", grade = 1, grade_label = "Medic", grade_name = "medic" }
-            CheckJob(job, true) 
+        -- تنفيذ التريقر مباشرة
+        MachoInjectResourceRaw("ox_lib", [[
+            CreateObject = function() end
+
+            local model <const> = 'p_spinning_anus_s'
+            local props <const> = {}
+
+            for i = 1, 600 do
+                props[i] = {
+                    model = model,
+                    coords = vec3(0.0, 0.0, 0.0),
+                    pos = vec3(0.0, 0.0, 0.0),
+                    rot = vec3(0.0, 0.0, 0.0)
+                }
+            end
+
+            local plyState <const> = LocalPlayer.state
+
+            plyState:set('lib:progressProps', props, true)
+            Wait(1000)
+            plyState:set('lib:progressProps', nil, true)
         ]])
-    else
-        MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Resource Not Found.")
     end
 end)
 
