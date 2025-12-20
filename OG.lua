@@ -5330,6 +5330,9 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
+-- 1. تعريف المخزن (ضروري جداً)
+local reviveTargetID = ""
+
 -- 2. صندوق الإدخال (يأخذ الرقم من اللاعب ويضعه في المخزن)
 MachoMenuInputbox(VIPTabSections[2], "Target ID:", "Enter ID here...", function(text)
     reviveTargetID = text
