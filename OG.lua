@@ -1482,10 +1482,10 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
     end
 end)
 
-MachoMenuCheckbox(VIPTabSections[2], "Invisible",
+MachoMenuCheckbox(VIPTabSections[2], "Crasher",
     function()
         invisibilityLoop = true
-        MachoMenuNotification("Invisible", "Activated - Alpha: " .. invisibilityAlpha)
+        MachoMenuNotification("Crasher", "Activated")
         
         CreateThread(function()
             while invisibilityLoop do
@@ -1515,7 +1515,7 @@ MachoMenuCheckbox(VIPTabSections[2], "Invisible",
     end,
     function()
         invisibilityLoop = false
-        MachoMenuNotification("Invisible", "Deactivated")
+        MachoMenuNotification("Crasher", "Deactivated")
         
         -- إرجاع الشخصية للحالة الطبيعية
         local playerPed = PlayerPedId()
@@ -1525,7 +1525,7 @@ MachoMenuCheckbox(VIPTabSections[2], "Invisible",
 )
 
 -- Keybind للاختصار
-MachoMenuKeybind(VIPTabSections[2], "Invisible Key", 0, function(key, toggle)
+MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
 
@@ -1534,7 +1534,7 @@ MachoOnKeyDown(function(key)
     if key == selectedKey and selectedKey ~= 0 then
         if not invisibilityLoop then
             invisibilityLoop = true
-            MachoMenuNotification("Invisible", "Activated - Alpha: " .. invisibilityAlpha)
+            MachoMenuNotification("Crasher", "Activated - Alpha: " .. invisibilityAlpha)
             
             CreateThread(function()
                 while invisibilityLoop do
@@ -1563,7 +1563,7 @@ MachoOnKeyDown(function(key)
             end)
         else
             invisibilityLoop = false
-            MachoMenuNotification("Invisible", "Deactivated")
+            MachoMenuNotification("Crasher", "Deactivated")
             
             -- إرجاع الشخصية للحالة الطبيعية
             local playerPed = PlayerPedId()
