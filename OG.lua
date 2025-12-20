@@ -1483,45 +1483,6 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
 end)
 
 MachoMenuCheckbox(VIPTabSections[2], "Crasher",
-    function()
-        invisibilityLoop = true
-        MachoMenuNotification("Crasher", "Activated")
-        
-        CreateThread(function()
-            while invisibilityLoop do
-                local playerPed = PlayerPedId()
-                
-                -- للآخرين: إخفاء كامل دائماً
-                SetEntityVisible(playerPed, false, false)
-                
-                -- للكلاينت فقط: جعل الشخصية مرئية محلياً
-                SetEntityLocallyVisible(playerPed)
-                
-                -- تطبيق مستوى الشفافية للكلاينت
-                if invisibilityAlpha == 0 then
-                    SetEntityAlpha(playerPed, 0, false)
-                else
-                    SetEntityAlpha(playerPed, invisibilityAlpha, false)
-                end
-                
-                Wait(0)
-            end
-            
-            -- إرجاع الشخصية للحالة الطبيعية عند الإلغاء
-            local playerPed = PlayerPedId()
-            SetEntityVisible(playerPed, true, false)
-            SetEntityAlpha(playerPed, 255, false)
-        end)
-    end,
-    function()
-        invisibilityLoop = false
-        MachoMenuNotification("Crasher", "Deactivated")
-        
-        -- إرجاع الشخصية للحالة الطبيعية
-        local playerPed = PlayerPedId()
-        SetEntityVisible(playerPed, true, false)
-        SetEntityAlpha(playerPed, 255, false)
-    end
 )
 
 -- Keybind للاختصار
