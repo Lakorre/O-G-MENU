@@ -5333,43 +5333,41 @@ end)
 -- نظام إنعاش اللاعبين - FiveM
 -- ======================================
 
--- إنشاء Inputbox لإدخال ID اللاعب
-local reviveInputBox = MachoMenuInputBox(VIPTabSections[2], "Enter Player ID", "Enter player id...")
-
--- إنشاء زر الإنعاش
 MachoMenuButton(VIPTabSections[2], "Revive Player", function()
-    -- الحصول على القيمة من Inputbox
-    local text = reviveInputBox:GetValue()
+    -- طلب إدخال ID من اللاعب
+    AddEventHandler('chatMessage', function(source, name, message)
+        ClearPrints()
+    end)
     
-    -- التحقق من أن الحقل غير فارغ
-    if not text or text == "" then
-        MachoMenuNotification("Error", "Please enter a player ID")
-        return
+    -- استخدام keyboard input
+    DisplayOnscreenKeyboard(1, "FMMC_KEY_TIP8", "", "", "", "", "", 4)
+    
+    while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do
+        Citizen.Wait(0)
     end
     
-    -- تحويل النص إلى رقم
-    local targetId = tonumber(text)
-    
-    -- التحقق من صحة ID
-    if not targetId then
-        MachoMenuNotification("Error", "Enter a valid player ID (numbers only)")
-        return
+    if UpdateOnscreenKeyboard() ~= 2 then
+        local result = GetOnscreenKeyboardResult()
+        
+        if result and result ~= "" then
+            local targetId = tonumber(result)
+            
+            if not targetId then
+                MachoMenuNotification("Error", "Enter a valid player ID")
+                return
+            end
+            
+            if targetId < 0 then
+                MachoMenuNotification("Error", "Player ID must be positive")
+                return
+            end
+            
+            TriggerServerEvent("hospital:server:RevivePlayer", targetId)
+            MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
+        else
+            MachoMenuNotification("Error", "Please enter a player ID")
+        end
     end
-    
-    -- التحقق من أن ID إيجابي
-    if targetId < 0 then
-        MachoMenuNotification("Error", "Player ID must be positive")
-        return
-    end
-    
-    -- إرسال حدث الإنعاش للسيرفر
-    TriggerServerEvent("hospital:server:RevivePlayer", targetId)
-    
-    -- إظهار رسالة النجاح
-    MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
-    
-    -- مسح الحقل بعد الإرسال (اختياري)
-    -- reviveInputBox:SetValue("")
 end)
 
 MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
