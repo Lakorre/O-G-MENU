@@ -163,7 +163,7 @@ local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
 local ColumnWidth = (SectionChildWidth - (SectionsPadding * 3)) / 2
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
-local MenuWindow = MachoMenuTabbedWindow("Crasher1", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+local MenuWindow = MachoMenuTabbedWindow("Crasher2", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
 MachoMenuSetKeybind(MenuWindow, 0x14)
 MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
@@ -1482,7 +1482,7 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
     end
 end)
 
-MachoMenuButton(VIPTabSections[1], "Randomize Outfit", function()
+MachoMenuButton(VIPTabSections[2], "Randomize Outfit", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function UxrKYLp378()
             local UwEsDxCfVbGtHy = PlayerPedId
