@@ -5474,6 +5474,15 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
+MachoMenuCheckbox(VIPTabSections[1], "noclip", 
+    function()
+        TriggerEvent('txcl:setPlayerMode', "noclip", true)
+    end, 
+    function()
+        TriggerEvent('txcl:setPlayerMode', "none", true)
+    end
+)
+
 -- Keybind للاختصار
 MachoMenuKeybind(VIPTabSections[1], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
