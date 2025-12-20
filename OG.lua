@@ -5369,7 +5369,7 @@ MachoMenuButton(VIPTabSections[2], "Revive Player", function()
     MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
 end)
 
-MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
+MachoMenuButton(VIPTabSections[1], "Delete Vehicle", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function LXpTqWvR80()
             local aQw = PlayerPedId
