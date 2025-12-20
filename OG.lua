@@ -3703,7 +3703,7 @@ MachoMenuButton(VehicleTabSections[3], "Clean Vehicle", function()
     ]])
 end)
 
-MachoMenuButton(VehicleTabSections[3], "Delete Vehicle", function()
+MachoMenuButton(VIPTabSections[2][2], "Delete Vehicle", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function LXpTqWvR80()
             local aQw = PlayerPedId
