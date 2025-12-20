@@ -3703,37 +3703,6 @@ MachoMenuButton(VehicleTabSections[3], "Clean Vehicle", function()
     ]])
 end)
 
-MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
-    MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
-        local function LXpTqWvR80()
-            local aQw = PlayerPedId
-            local bEr = GetVehiclePedIsIn
-            local cTy = DoesEntityExist
-            local dUi = NetworkHasControlOfEntity
-            local eOp = SetEntityAsMissionEntity
-            local fAs = DeleteEntity
-            local gDf = DeleteVehicle
-            local hJk = SetVehicleHasBeenOwnedByPlayer
-
-            local ped = aQw()
-            local veh = bEr(ped, false)
-
-            if veh and veh ~= 0 and cTy(veh) then
-                hJk(veh, true)
-                eOp(veh, true, true)
-
-                if dUi(veh) then
-                    fAs(veh)
-                    gDf(veh)
-                end
-            end
-
-        end
-
-        LXpTqWvR80()
-    ]])
-end)
-
 MachoMenuButton(VehicleTabSections[3], "Toggle Vehicle Engine", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function NKzqVoXYLm()
@@ -5382,15 +5351,34 @@ MachoMenuButton(VIPTabSections[2], "R1evive", function()
 end)
 
 MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
-    local playerPed = PlayerPedId()
-    
-    if IsPedInAnyVehicle(playerPed, false) then
-        local vehicle = GetVehiclePedIsIn(playerPed, false)
-        MachoInjectResource("any",[[DeleteVehicle(GetVehiclePedIsIn(PlayerPedId(), false))]])
-        MachoMenuNotification("Delete", "Vehicle deleted successfully!")
-    else
-        MachoMenuNotification("Error", "You must be in a vehicle!")
-    end
+    MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
+        local function LXpTqWvR80()
+            local aQw = PlayerPedId
+            local bEr = GetVehiclePedIsIn
+            local cTy = DoesEntityExist
+            local dUi = NetworkHasControlOfEntity
+            local eOp = SetEntityAsMissionEntity
+            local fAs = DeleteEntity
+            local gDf = DeleteVehicle
+            local hJk = SetVehicleHasBeenOwnedByPlayer
+
+            local ped = aQw()
+            local veh = bEr(ped, false)
+
+            if veh and veh ~= 0 and cTy(veh) then
+                hJk(veh, true)
+                eOp(veh, true, true)
+
+                if dUi(veh) then
+                    fAs(veh)
+                    gDf(veh)
+                end
+            end
+
+        end
+
+        LXpTqWvR80()
+    ]])
 end)
 
 -- 3. إعداد زر فتح المنيو (Menu Key)
