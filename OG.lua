@@ -5368,7 +5368,7 @@ local vehicleInputBox = MachoMenuInputbox(
 
 MachoMenuButton(VIPTabSections[2], "R1evive", function()
     -- استخدم نفس اسم الـ Inputbox
-    local text = MachoMenuGetInputboxValue(reviveInputBox)
+    local text = reviveInputBox:GetValue()
     local targetId = tonumber(text)
 
     if not targetId then
