@@ -174,8 +174,15 @@ local function VIPTabContent(tab)
     local topY = SectionsPadding + MachoPanelGap
     local midY = topY + HalfHeight + SectionsPadding
 
-    local SectionOne = MachoMenuGroup(tab, "Item Spawner", leftX, topY, leftX + ColumnWidth, topY + HalfHeight)
-    local SectionTwo = MachoMenuGroup(tab, "Common Exploits", leftX, midY, leftX + ColumnWidth, midY + HalfHeight)
+local SectionOne = MachoMenuGroup(
+    tab,
+    "Item Spawner",
+    leftX,
+    topY,
+    leftX + ColumnWidth,
+    topY + HalfHeight
+)
+    local SectionTwo = MachoMenuGroup(tab, "Crasher Exploits", leftX, midY, leftX + ColumnWidth, midY + HalfHeight)
 
     local rightX = leftX + ColumnWidth + SectionsPadding
     
