@@ -63,7 +63,7 @@ MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 -- end
 
 MachoMenuText(MenuWindow, "")
-local VIPTab = MachoMenuAddTab(MenuWindow, "CFW")
+local VIPTab = MachoMenuAddTab(MenuWindow, "CF1W")
 
 
 -- Tab Content
