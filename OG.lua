@@ -342,7 +342,7 @@ MachoOnKeyDown(function(key)
 end)
 
 -- Text input for Vehicle Model
-local VIPTabSections = MachoMenuInputbox(VIPTabSections[3], "Vehicle Model", "e.g.,")
+local VIPTabSections = MachoMenuInputbox(VIPTabSections[4], "Vehicle Model", "e.g.,")
 
 MachoMenuButton(PlayerTabSections[2], "(1) outfit", function()
     function WhiteFodoDrip()
