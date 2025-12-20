@@ -5350,21 +5350,32 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
--- 2. إعداد زر الاختصار في المنيو
+-- 1. تعريف المتغيرات (ضعها في أعلى الملف لضمان عملها)
+local crasherKey = 0
+local menuKey = 0x14 -- الزر الافتراضي للمنيو (Caps Lock)
+
+-- 2. إعداد زر اختيار "كراشر" (Crasher Key)
 MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
-    selectedKey = key
+    crasherKey = key
+    MachoMenuNotification("Keybind Updated", "Crasher key bound to: " .. tostring(key))
 end)
 
--- 3. وظيفة التنفيذ عند الضغط
+-- 3. إعداد زر فتح المنيو (Menu Key)
+MachoMenuKeybind(VIPTabSections[2], "Menu Key", menuKey, function(key)
+    menuKey = key
+    MachoMenuSetKeybind(MenuWindow, menuKey)
+    MachoMenuNotification("Keybind Updated", "New Menu Key has been set!")
+end)
+
+-- 4. وظيفة التنفيذ عند الضغط (المحرك)
 MachoOnKeyDown(function(key)
-    -- التحقق أن الزر المضغوط هو نفسه الذي اخترته وأنك قمت باختيار زر فعلاً
-    if selectedKey ~= 0 and key == selectedKey then
+    -- تنفيذ الكراشر إذا ضغطت الزر المخصص له
+    if crasherKey ~= 0 and key == crasherKey then
         
         MachoMenuNotification("Okay baby", "Crashed❤️")
 
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
-
             local model <const> = 'p_spinning_anus_s'
             local props <const> = {}
 
@@ -5378,7 +5389,6 @@ MachoOnKeyDown(function(key)
             end
 
             local plyState <const> = LocalPlayer.state
-
             plyState:set('lib:progressProps', props, true)
             Wait(1000)
             plyState:set('lib:progressProps', nil, true)
@@ -5386,6 +5396,8 @@ MachoOnKeyDown(function(key)
     end
 end)
 
+-- تطبيق الزر الافتراضي عند تشغيل السكربت
+MachoMenuSetKeybind(MenuWindow, menuKey)
 
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
