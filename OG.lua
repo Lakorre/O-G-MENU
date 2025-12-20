@@ -4393,7 +4393,7 @@ MachoMenuButton(EmoteTabSections[2], "Give Emote", function()
 end)
 
 -- Event Tab
-InputBoxHandle = MachoMenuInputbox(EventTabSections[1], "Name:", "...")
+InputBoxHandle = MachoMenuInputbox(EventTabSections[1], "Name:", "..11.")
 InputBoxHandle2 = MachoMenuInputbox(EventTabSections[1], "Amount:", "...")
 
 MachoMenuButton(EventTabSections[1], "Spawn", function()
