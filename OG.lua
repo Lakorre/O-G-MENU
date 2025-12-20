@@ -1506,6 +1506,16 @@ MachoInjectResourceRaw("ox_lib", [[
         ]])
 end)
 
+
+MachoMenuCheckbox(VIPTabSections, "Random Outfit Loop", 
+    function()
+        enableRandomOutfit = true
+    end,
+    function()
+        enableRandomOutfit = false
+    end
+)
+
 MachoMenuKeybind(VIPTabSections, "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
