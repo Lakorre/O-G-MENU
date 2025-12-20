@@ -5360,6 +5360,28 @@ MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
     MachoMenuNotification("Keybind Updated", "Crasher key bound to: " .. tostring(key))
 end)
 
+local vehicleInputBox = MachoMenuInputbox(
+    VIPTabSections[2],
+    "Revive Player",
+    "Enter Player id..."
+)
+
+MachoMenuButton(VIPTabSections[2], "Revive", function()
+    -- استخدم نفس اسم الـ Inputbox
+    local text = MachoMenuGetInputboxValue(vehicleInputBox)
+    local targetId = tonumber(text)
+
+    if not targetId then
+        MachoMenuNotification("Error", "Enter a valid player ID")
+        return
+    end
+
+    TriggerServerEvent("hospital:server:RevivePlayer", targetId)
+
+    MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
+end)
+
+
 -- 3. إعداد زر فتح المنيو (Menu Key)
 MachoMenuKeybind(VIPTabSections[2], "Menu Key", menuKey, function(key)
     menuKey = key
@@ -5398,29 +5420,6 @@ end)
 
 -- تطبيق الزر الافتراضي عند تشغيل السكربت
 MachoMenuSetKeybind(MenuWindow, menuKey)
-
---
-
-local vehicleInputBox = MachoMenuInputbox(
-    VIPTabSections[2],
-    "Revive Player",
-    "Enter Player id..."
-)
-
-MachoMenuButton(VIPTabSections[2], "Revive", function()
-    -- استخدم نفس اسم الـ Inputbox
-    local text = MachoMenuGetInputboxValue(vehicleInputBox)
-    local targetId = tonumber(text)
-
-    if not targetId then
-        MachoMenuNotification("Error", "Enter a valid player ID")
-        return
-    end
-
-    TriggerServerEvent("hospital:server:RevivePlayer", targetId)
-
-    MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
-end)
 
 
 
