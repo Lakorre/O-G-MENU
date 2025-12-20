@@ -144,18 +144,13 @@ end
 --   end
 
 
-
-
-
-
-
 -- Menu Builder
-local MenuSize = vec2(850, 600) -- 
-local MenuStartCoords = vec2(400, 300) -- 
+local MenuSize = vec2(650, 450) -- قمنا بتقليل العرض من 850 والطول من 600
+local MenuStartCoords = vec2(500, 300) -- تم تعديل الإحداثيات لتتوسط الشاشة الجديدة
 
-local TabsBarWidth = 180 -- 
-local SectionsPadding = 10
-local MachoPanelGap = 15
+local TabsBarWidth = 150 -- تقليل عرض قائمة التبويبات الجانبية لتناسب الحجم الصغير
+local SectionsPadding = 8
+local MachoPanelGap = 10
 
 local SectionChildWidth = MenuSize.x - TabsBarWidth - SectionsPadding
 local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
@@ -163,7 +158,7 @@ local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
 local ColumnWidth = (SectionChildWidth - (SectionsPadding * 3)) / 2
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
-local MenuWindow = MachoMenuTabbedWindow("11", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+local MenuWindow = MachoMenuTabbedWindow("AC", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
 MachoMenuSetKeybind(MenuWindow, 0x14)
 MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
