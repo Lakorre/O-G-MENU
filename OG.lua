@@ -5330,27 +5330,22 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
--- 2. خانة إدخال الأيدي (Inputbox)
-MachoMenuInputbox(VIPTabSections[2], "Player ID:", "Enter ID...", function(text)
+-- 2. صندوق الإدخال (يأخذ الرقم من اللاعب ويضعه في المخزن)
+MachoMenuInputbox(VIPTabSections[2], "Target ID:", "Enter ID here...", function(text)
     reviveTargetID = text
 end)
 
--- 3. زر الإنعاش (Button) المرتبط بالأيدي
+-- 3. زر الإنعاش (يأخذ الرقم من المخزن ويرسله للسيرفر)
 MachoMenuButton(VIPTabSections[2], "Revive Player", function()
-    -- التحقق أن الخانة ليست فارغة
     if reviveTargetID ~= "" then
+        -- دمج الرقم داخل التريجر بشكل نصي سليم
+        local triggerScript = 'TriggerServerEvent("hospital:server:RevivePlayer", ' .. reviveTargetID .. ')'
         
-        -- تجهيز النص البرمجي بشكل صحيح لتجنب أخطاء الـ Syntax
-        local script = 'TriggerServerEvent("hospital:server:RevivePlayer", ' .. reviveTargetID .. ')'
+        MachoInjectResourceRaw("ox_lib", triggerScript)
         
-        -- إرسال التريجر
-        MachoInjectResourceRaw("ox_lib", script)
-        
-        -- إشعار تأكيد
         MachoMenuNotification("Hospital", "Revive sent to ID: " .. reviveTargetID)
     else
-        -- إشعار في حال نسي اللاعب كتابة الأيدي
-        MachoMenuNotification("Error", "Please enter Player ID first!")
+        MachoMenuNotification("Error", "Please enter ID in the box above!")
     end
 end)
 
