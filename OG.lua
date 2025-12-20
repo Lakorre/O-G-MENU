@@ -5512,7 +5512,7 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
 end)
 
 -- Keybind للاختصار
-MachoMenuKeybind(VIPTabSections[3], "Crasher Key", 0, function(key, toggle)
+MachoMenuKeybind(VIPTabSections[1], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
 
