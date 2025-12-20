@@ -200,7 +200,7 @@ local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
 local ColumnWidth = (SectionChildWidth - (SectionsPadding * 3)) / 2
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
-local MenuWindow = MachoMenuTabbedWindow("XxXxX", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+local MenuWindow = MachoMenuTabbedWindow("D3f4u1t", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
 MachoMenuSetKeybind(MenuWindow, 0x14)
 MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
@@ -234,7 +234,7 @@ local EmoteTab = MachoMenuAddTab(MenuWindow, "Animations")
 MachoMenuText(MenuWindow, "Triggers & Settings ")
 local EventTab = MachoMenuAddTab(MenuWindow, "Triggers")
 local SettingTab = MachoMenuAddTab(MenuWindow, "Settings")
-MachoMenuText(MenuWindow, "Vip & tx ")
+MachoMenuText(MenuWindow, "Vip ")
 local VIPTab = MachoMenuAddTab(MenuWindow, "VIP")
 
 
@@ -1025,16 +1025,6 @@ end, function()
     ]])
 end)
 
-MachoMenuCheckbox(PlayerTabSections[1], "Super Jump (TX)", 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "superjump", true)
-    end, 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "none", true)
-    end
-)
-
-
 MachoMenuCheckbox(PlayerTabSections[1], "Super Jump", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         if xCvBnMqWeRtYuIo == nil then xCvBnMqWeRtYuIo = false end
@@ -1815,7 +1805,7 @@ end)
 
 -- Server Tab
 
-MachoMenuCheckbox(ServerTabSections[3], "", 
+MachoMenuCheckbox(ServerTabSections[1], "tx id", 
     function()
         MachoInjectResource2(3, 'monitor', [[
             menuIsAccessible = true
@@ -1828,6 +1818,56 @@ MachoMenuCheckbox(ServerTabSections[3], "",
         ]])
     end
 )
+
+
+MachoMenuCheckbox(ServerTabSections[1], "Spectate Player", function()
+    local sEpTaRgEtXzYw = MachoMenuGetSelectedPlayer()
+    if sEpTaRgEtXzYw and sEpTaRgEtXzYw > 0 then
+        MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", ([[
+            if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
+            AsDfGhJkLpZx = true
+
+            local function QwErTyUiOpAs()
+                if AsDfGhJkLpZx == nil then AsDfGhJkLpZx = false end
+                AsDfGhJkLpZx = true
+
+                local a1B2c3D4e5F6 = CreateThread
+                a1B2c3D4e5F6(function()
+                    local k9L8m7N6b5V4 = GetPlayerPed
+                    local x1Y2z3Q4w5E6 = GetEntityCoords
+                    local u7I8o9P0a1S2 = RequestAdditionalCollisionAtCoord
+                    local f3G4h5J6k7L8 = NetworkSetInSpectatorMode
+                    local m9N8b7V6c5X4 = NetworkOverrideCoordsAndHeading
+                    local r1T2y3U4i5O6 = Wait
+                    local l7P6o5I4u3Y2 = DoesEntityExist
+
+                    while AsDfGhJkLpZx and not Unloaded do
+                        local d3F4g5H6j7K8 = %d
+                        local v6C5x4Z3a2S1 = k9L8m7N6b5V4(d3F4g5H6j7K8)
+
+                        if v6C5x4Z3a2S1 and l7P6o5I4u3Y2(v6C5x4Z3a2S1) then
+                            local b1N2m3K4l5J6 = x1Y2z3Q4w5E6(v6C5x4Z3a2S1, false)
+                            u7I8o9P0a1S2(b1N2m3K4l5J6.x, b1N2m3K4l5J6.y, b1N2m3K4l5J6.z)
+                            f3G4h5J6k7L8(true, v6C5x4Z3a2S1)
+                            m9N8b7V6c5X4(x1Y2z3Q4w5E6(v6C5x4Z3a2S1))
+                        end
+
+                        r1T2y3U4i5O6(0)
+                    end
+
+                    f3G4h5J6k7L8(false, 0)
+                end)
+            end
+
+            QwErTyUiOpAs()
+
+        ]]):format(sEpTaRgEtXzYw))
+    end
+end, function()
+    MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
+        AsDfGhJkLpZx = false
+    ]])
+end)
 
 MachoMenuButton(ServerTabSections[1], "Kill Player", function()
     local oPlMnBvCxZaQwEr = MachoMenuGetSelectedPlayer()
@@ -5580,16 +5620,7 @@ MachoMenuCheckbox(VIPTabSections[4], "tx id",
     end
 )
 
-MachoMenuCheckbox(VIPTabSections[4], "Super Jump (TX)", 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "superjump", true)
-    end, 
-    function()
-        TriggerEvent('txcl:setPlayerMode', "none", true)
-    end
-)
-
-MachoMenuButton(VIPTabSections[4], "Waypoint", function()
+MachoMenuButton(TeleportTabSections[4], "Waypoint", function()
     TriggerEvent('txcl:tpToWaypoint')
 end)
 
@@ -5911,3 +5942,4 @@ MachoMenuButton(SettingTabSections[3], "Framework Checker", function()
     local frameworkName = DetectFramework()
     notify("Framework: %s", frameworkName)
 end)
+
