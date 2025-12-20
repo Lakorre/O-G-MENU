@@ -5329,12 +5329,6 @@ MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
     MachoMenuNotification("Keybind Updated", "Crasher key bound to: " .. tostring(key))
 end)
 
-local vehicleInputBox = MachoMenuInputbox(
-    VIPTabSections[2],
-    "Revive Player",
-    "Enter Player id..."
-)
-
 -- ======================================
 -- نظام إنعاش اللاعبين - FiveM
 -- ======================================
