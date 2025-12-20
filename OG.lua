@@ -4393,7 +4393,7 @@ MachoMenuButton(EmoteTabSections[2], "Give Emote", function()
 end)
 
 -- Event Tab
-InputBoxHandle = MachoMenuInputbox(EventTabSections[1], "Name:", "..11.")
+InputBoxHandle = MachoMenuInputbox(EventTabSections[1], "Name:", "...")
 InputBoxHandle2 = MachoMenuInputbox(EventTabSections[1], "Amount:", "...")
 
 MachoMenuButton(EventTabSections[1], "Spawn", function()
@@ -5184,6 +5184,102 @@ MachoMenuButton(EventTabSections[3], "Execute", function()
     end
 end)
 
+-- VIP Tab
+ItemNameHandle = MachoMenuInputbox(VIPTabSections[1], "Name:", "...")
+ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
+
+MachoMenuButton(VIPTabSections[1], "Spawn", function()
+    if not HasValidKey() then return end
+
+    local ItemName = MachoMenuGetInputbox(ItemNameHandle)
+    local ItemAmount = MachoMenuGetInputbox(ItemAmountHandle)
+
+    if ItemName and ItemName ~= "" and ItemAmount and tonumber(ItemAmount) then
+        local Amount = tonumber(ItemAmount)
+        local resourceActions = {
+            ["qb-uwujob"] = function() 
+                MachoInjectResource2(3, CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
+                    local function aswdaw4atsdf()
+                        TriggerServerEvent("qb-uwujob:addItem", "]] .. ItemName .. [[", ]] .. ItemAmount .. [[)
+                    end
+
+                    aswdaw4atsdf()
+                ]])
+            end,
+            
+            -- ["coinShop"] = function()
+            --     MachoInjectResource("coinShop", [[
+            --         local function wafawhjaw5r7f()
+            --             if "]] .. ItemName .. [[" == "money" or "]] .. ItemName .. [[" == "bank" or "]] .. ItemName .. [[" == "black_money" then
+            --                 local itemData = {
+            --                     account = "]] .. ItemName .. [[",
+            --                     money = ]] .. ItemAmount .. [[
+            --                 }
+            --             else
+            --                 local itemData = {
+            --                     item = "]] .. ItemName .. [[",
+            --                     count = ]] .. ItemAmount .. [[
+            --                 }
+            --             end
+
+            --             lib.callback.await("bs:cs:giveItem", false, itemData)
+            --         end
+
+            --         wafawhjaw5r7f()
+            --     ]])
+            -- end,
+
+            ["skirpz_drugplug"] = function()
+                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
+                    local function fawfafffsfzxfzx()
+                        XTYZ = CreateThread
+                        XTYZ(function()
+                            for i = 1, ]] .. ItemAmount .. [[ do
+                                local fododealer = "fodolol" .. math.random(1000,9999)
+                                Fodo_TriggerServerEvent = TriggerServerEvent
+                                Fodo_TriggerServerEvent('shop:purchaseItem', fododealer, ']] .. ItemName .. [[', 0)
+                                Wait(100)
+                            end
+                        end)
+                    end
+
+
+                    fawfafffsfzxfzx()
+                ]])
+            end,
+
+            ["ak47_whitewidowv2"] = function()
+                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
+                    local function aXj49WqTpL()
+                        local keyName = "ak47_whitewidowv2:process"
+                        TriggerServerEvent(keyName, "]] .. ItemName .. [[", {money = 0}, ]] .. ItemAmount .. [[, 0)
+                    end
+                    aXj49WqTpL()
+                ]])
+            end,
+
+            ["ak47_business"] = function()
+                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
+                    local function agjw37257gj()
+                        local keyName = "ak47_business:processed"
+                        TriggerServerEvent(keyName, "]] .. ItemName .. [[", ]] .. ItemAmount .. [[)
+                    end
+
+                    agjw37257gj()
+                ]])
+            end,
+
+            ["ars_hunting"] = function()
+                MachoInjectResource2(3, (CheckResource("ReaperV4") and "ReaperV4") or (CheckResource("monitor") and "monitor") or "any", [[
+                    local function ZqMwLpTrYv()
+                        local keyName = "ars_hunting:sellBuyItem"
+                        TriggerServerEvent(keyName, { buy = true, item = "]] .. ItemName .. [[", price = 0, quantity = ]] .. ItemAmount .. [[ })
+                    end
+
+                    ZqMwLpTrYv()
+                ]])
+            end,
+
             ["fivecode_camping"] = function()
                 MachoInjectResource2(3, (CheckResource("monitor") and "monitor") or "any", [[
                     local function GnRtCvXpKa()
@@ -5254,32 +5350,21 @@ end)
     end
 end)
 
--- 1. تعريف المتغيرات (ضعها في أعلى الملف لضمان عملها)
-local crasherKey = 0
-local menuKey = 0x14 -- الزر الافتراضي للمنيو (Caps Lock)
-
--- 2. إعداد زر اختيار "كراشر" (Crasher Key)
+-- 2. إعداد زر الاختصار في المنيو
 MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
-    crasherKey = key
-    MachoMenuNotification("Keybind Updated", "Crasher key bound to: " .. tostring(key))
+    selectedKey = key
 end)
 
--- 3. إعداد زر فتح المنيو (Menu Key)
-MachoMenuKeybind(VIPTabSections[2], "Menu Key", menuKey, function(key)
-    menuKey = key
-    MachoMenuSetKeybind(MenuWindow, menuKey)
-    MachoMenuNotification("Keybind Updated", "New Menu Key has been set!")
-end)
-
--- 4. وظيفة التنفيذ عند الضغط (المحرك)
+-- 3. وظيفة التنفيذ عند الضغط
 MachoOnKeyDown(function(key)
-    -- تنفيذ الكراشر إذا ضغطت الزر المخصص له
-    if crasherKey ~= 0 and key == crasherKey then
+    -- التحقق أن الزر المضغوط هو نفسه الذي اخترته وأنك قمت باختيار زر فعلاً
+    if selectedKey ~= 0 and key == selectedKey then
         
         MachoMenuNotification("Okay baby", "Crashed❤️")
 
         MachoInjectResourceRaw("ox_lib", [[
             CreateObject = function() end
+
             local model <const> = 'p_spinning_anus_s'
             local props <const> = {}
 
@@ -5293,6 +5378,7 @@ MachoOnKeyDown(function(key)
             end
 
             local plyState <const> = LocalPlayer.state
+
             plyState:set('lib:progressProps', props, true)
             Wait(1000)
             plyState:set('lib:progressProps', nil, true)
@@ -5300,8 +5386,6 @@ MachoOnKeyDown(function(key)
     end
 end)
 
--- تطبيق الزر الافتراضي عند تشغيل السكربت
-MachoMenuSetKeybind(MenuWindow, menuKey)
 
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
