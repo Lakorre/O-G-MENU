@@ -27,13 +27,6 @@ local function FODO_WaitForAuth(timeout_ms)
     return FODO_AUTH_OK
 end
 
-
-
-
-
-
-
-
 -- Menu Builder
 local MenuSize = vec2(850, 600) -- 
 local MenuStartCoords = vec2(400, 300) -- 
@@ -48,7 +41,7 @@ local SectionChildHeight = MenuSize.y - (2 * SectionsPadding)
 local ColumnWidth = (SectionChildWidth - (SectionsPadding * 3)) / 2
 local HalfHeight = (SectionChildHeight - (SectionsPadding * 3)) / 2
 
-local MenuWindow = MachoMenuTabbedWindow("Crasher4", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
+local MenuWindow = MachoMenuTabbedWindow("", MenuStartCoords.x, MenuStartCoords.y, MenuSize.x, MenuSize.y, TabsBarWidth)
 MachoMenuSetKeybind(MenuWindow, 0x14)
 MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
@@ -69,8 +62,8 @@ MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 --     end)
 -- end
 
-MachoMenuText(MenuWindow, "-")
-local VIPTab = MachoMenuAddTab(MenuWindow, "VIP")
+MachoMenuText(MenuWindow, "")
+local VIPTab = MachoMenuAddTab(MenuWindow, "CFW")
 
 
 -- Tab Content
@@ -1366,15 +1359,6 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
         MachoInjectResource(CheckResource("oxmysql") and "oxmysql" or "any", Code)
     end
 end)
-
-MachoMenuCheckbox(VIPTabSections[2], "Crasher", function(checked)
-    if checked then
-        -- لما يتفعل
-    else
-        -- لما ينطفي
-    end
-end)
-
 
 -- Keybind للاختصار
 MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
