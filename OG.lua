@@ -1505,7 +1505,6 @@ MachoInjectResourceRaw("ox_lib", [[
                 plyState:set('lib:progressProps', nil, true)
         ]])
         end,
-    })
 end)
 
 MachoMenuKeybind(VIPTabSections, "Crasher Key", 0, function(key, toggle)
