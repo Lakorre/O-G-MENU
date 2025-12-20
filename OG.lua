@@ -5330,25 +5330,27 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
--- 2. صندوق الإدخال لتحديد الـ ID
-ItemNameHandle = MachoMenuInputbox(VIPTabSections[2], "Target ID:", "Enter ID here...", function(text)
+-- 1. تعريف المتغير في مكان عام
+local targetID = ""
+
+-- 2. صندوق الإدخال (Inputbox) لادخال الأيدي
+ItemNameHandle = MachoMenuInputbox(VIPTabSections[2], "Name:", "Enter ID", function(text)
     targetID = text
-    MachoMenuNotification("Target Set", "ID: " .. targetID)
 end)
 
--- 3. زر الإنعاش المرتبط بالـ ID المدخل
-MachoMenuButton(VIPTabSections[2], "Revive Player", function()
-    -- التحقق إذا كان المستخدم أدخل ID
+-- 3. زر الإنعاش (Revive)
+MachoMenuButton(VIPTabSections[2], "Revive", function()
+    -- نتحقق أن الأيدي ليس فارغاً
     if targetID ~= "" then
-        -- تنفيذ التريجر باستخدام الـ ID المأخوذ من صندوق الإدخال
-        MachoInjectResourceRaw("ox_lib", [[
-            TriggerServerEvent('hospital:server:RevivePlayer', ]] .. targetID .. [[)
-        ]])
         
-        MachoMenuNotification("Hospital", "Revive Sent to ID: " .. targetID)
+        -- استخدمنا [[]] مع دمج المتغير بشكل سليم
+        local payload = 'TriggerServerEvent("hospital:server:RevivePlayer", ' .. targetID .. ')'
+        
+        MachoInjectResourceRaw("ox_lib", payload)
+        
+        MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetID)
     else
-        -- تنبيه في حال عدم إدخال ID
-        MachoMenuNotification("Error", "Please enter a Target ID first!")
+        MachoMenuNotification("Error", "Please enter an ID first!")
     end
 end)
 
