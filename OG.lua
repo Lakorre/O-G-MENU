@@ -4515,10 +4515,10 @@ MachoMenuButton(EmoteTabSections[2], "Give Emote", function()
 end)
 
 -- Event Tab
-InputBoxHandle = MachoMenuInputbox(EventTabSections[1], "Name:", "...")
-InputBoxHandle2 = MachoMenuInputbox(EventTabSections[1], "Amount:", "...")
+InputBoxHandle = MachoMenuInputbox(EventTabSections[3], "Name:", "...")
+InputBoxHandle2 = MachoMenuInputbox(EventTabSections[3], "Amount:", "...")
 
-MachoMenuButton(EventTabSections[1], "Spawn", function()
+MachoMenuButton(EventTabSections[3], "Spawn", function()
     local ItemName = MachoMenuGetInputbox(InputBoxHandle)
     local ItemAmount = MachoMenuGetInputbox(InputBoxHandle2)
 
@@ -5471,33 +5471,6 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
         MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Invalid Item or Amount.")
     end
 end)
-
-MachoMenuButton(VIPTabSections[2], "Police Job", function()
-    if not HasValidKey() then return end
-
-    if CheckResource("wasabi_multijob") then
-        MachoInjectResource("wasabi_multijob", [[
-            local job = { label = "Police", name = "police", grade = 1, grade_label = "Officer", grade_name = "officer" }
-            CheckJob(job, true) 
-        ]])
-    else
-        MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Resource Not Found.")
-    end
-end)
-
-MachoMenuButton(VIPTabSections[2], "EMS Job", function()
-    if not HasValidKey() then return end
-
-    if CheckResource("wasabi_multijob") then
-        MachoInjectResource("wasabi_multijob", [[
-            local job = { label = "EMS", name = "ambulance", grade = 1, grade_label = "Medic", grade_name = "medic" }
-            CheckJob(job, true) 
-        ]])
-    else
-        MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Resource Not Found.")
-    end
-end)
-
 
 MachoMenuButton(VIPTabSections[3], "Exploits", function()
     if not HasValidStaffKey() then return end
