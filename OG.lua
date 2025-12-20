@@ -29,12 +29,12 @@ end
 
 
 -- Menu Builder
-local MenuSize = vec2(420, 500) -- تم تصغير العرض من 850 إلى 420 لإلغاء السواد
-local MenuStartCoords = vec2(100, 100)
+local MenuSize = vec2(420, 500)
+local MenuStartCoords = vec2(50, 80)
 
-local TabsBarWidth = 120
-local SectionsPadding = 10
-local MachoPanelGap = 10
+local TabsBarWidth = 110
+local SectionsPadding = 12
+local MachoPanelGap = 8
 
 -- حسابات العرض التلقائية لتناسب الحجم الصغير
 local SectionChildWidth = MenuSize.x - TabsBarWidth - (SectionsPadding * 2)
