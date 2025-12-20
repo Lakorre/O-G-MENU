@@ -5330,27 +5330,6 @@ ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
     end
 end)
 
--- متغير يخزن الـ input
-local reviveInputHandle = MachoMenuInputbox(
-    VIPTabSections[2],
-    "Player ID",
-    "Enter player id..."
-)
-
--- زر تحتها مباشرة
-MachoMenuButton(VIPTabSections[2], "Revive Player", function()
-    local text = MachoMenuGetInputboxValue(reviveInputHandle)
-    local id = tonumber(text)
-
-    if not id then
-        MachoMenuNotification("Revive", "Enter a valid ID")
-        return
-    end
-
-    TriggerServerEvent("hospital:server:RevivePlayer", id)
-    MachoMenuNotification("Revive", "Revive sent to ID: " .. id)
-end)
-
 -- 1. تعريف المتغيرات (ضعها في أعلى الملف لضمان عملها)
 local crasherKey = 0
 local menuKey = 0x14 -- الزر الافتراضي للمنيو (Caps Lock)
