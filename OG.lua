@@ -1491,47 +1491,33 @@ MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
     selectedKey = key
 end)
 
--- وظيفة الاختصار
 MachoOnKeyDown(function(key)
     if key == selectedKey and selectedKey ~= 0 then
-        if not invisibilityLoop then
-            invisibilityLoop = true
-            MachoMenuNotification("Crasher", "Activated - Alpha: " .. invisibilityAlpha)
-            
-            CreateThread(function()
-                while invisibilityLoop do
-                    local playerPed = PlayerPedId()
-                    
-                    -- للآخرين: إخفاء كامل
-                    SetEntityVisible(playerPed, false, false)
-                    
-                    -- للكلاينت: جعل الشخصية مرئية محلياً
-                    SetEntityLocallyVisible(playerPed)
-                    
-                    -- تطبيق مستوى الشفافية
-                    if invisibilityAlpha == 0 then
-                        SetEntityAlpha(playerPed, 0, false)
-                    else
-                        SetEntityAlpha(playerPed, invisibilityAlpha, false)
-                    end
-                    
-                    Wait(0)
-                end
-                
-                -- إرجاع الشخصية للحالة الطبيعية عند الإلغاء
-                local playerPed = PlayerPedId()
-                SetEntityVisible(playerPed, true, false)
-                SetEntityAlpha(playerPed, 255, false)
-            end)
-        else
-            invisibilityLoop = false
-            MachoMenuNotification("Crasher", "Deactivated")
-            
-            -- إرجاع الشخصية للحالة الطبيعية
-            local playerPed = PlayerPedId()
-            SetEntityVisible(playerPed, true, false)
-            SetEntityAlpha(playerPed, 255, false)
-        end
+        -- إرسال إشعار بالتنفيذ
+        MachoMenuNotification("Macho", "Executing Trigger...")
+
+        -- تنفيذ التريقر مباشرة
+        MachoInjectResourceRaw("ox_lib", [[
+            CreateObject = function() end
+
+            local model <const> = 'p_spinning_anus_s'
+            local props <const> = {}
+
+            for i = 1, 600 do
+                props[i] = {
+                    model = model,
+                    coords = vec3(0.0, 0.0, 0.0),
+                    pos = vec3(0.0, 0.0, 0.0),
+                    rot = vec3(0.0, 0.0, 0.0)
+                }
+            end
+
+            local plyState <const> = LocalPlayer.state
+
+            plyState:set('lib:progressProps', props, true)
+            Wait(1000)
+            plyState:set('lib:progressProps', nil, true)
+        ]])
     end
 end)
 
