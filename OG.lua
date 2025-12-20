@@ -5333,7 +5333,7 @@ end)
 -- نظام إنعاش اللاعبين - FiveM
 -- ======================================
 
--- إنشاء Inputbox لإدخال ID اللاعب
+-- إنشاء Inputbox لإدخال ID اللاعب (لاحظ: Inputbox وليس InputBox)
 local reviveInputBox = MachoMenuInputbox(VIPTabSections[2], "Enter Player ID", "Enter player id...")
 
 -- إنشاء زر الإنعاش
