@@ -67,7 +67,7 @@ MachoMenuSetAccent(MenuWindow, 79, 50, 50)
 
 -- CreateRainbowInterface()
 MachoMenuText(MenuWindow, "")
-local VIPTab = MachoMenuAddTab(MenuWindow, "Hy")
+local VIPTab = MachoMenuAddTab(MenuWindow, "1:")
 
 
 -- Tab Content
