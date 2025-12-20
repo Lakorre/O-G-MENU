@@ -5386,6 +5386,14 @@ MachoOnKeyDown(function(key)
     end
 end)
 
+-- إعداد واجهة اختيار الزر
+MachoMenuKeybind(VIPTabSections[2], "Menu Key", 0x14, function(key, toggle)
+    selectedKey = key    -- تحديث الزر المختار
+    MachoMenuSetKeybind(MenuWindow, selectedKey) -- تطبيق الزر المختار
+end)
+
+-- تعيين الزر الافتراضي عند تحميل القائمة
+MachoMenuSetKeybind(MenuWindow, selectedKey)
 
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
