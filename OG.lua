@@ -5185,27 +5185,7 @@ MachoMenuButton(EventTabSections[3], "Execute", function()
 end)
 
 -- VIP Tab
-ItemNameHandle = MachoMenuInputbox(VIPTabSections[2], "Name:", "...")
 ItemAmountHandle = MachoMenuInputbox(VIPTabSections[1], "Amount:", "...")
-
-MachoMenuButton(VIPTabSections[1], "Spawn", function()
-    if not HasValidKey() then return end
-
-    local ItemName = MachoMenuGetInputbox(ItemNameHandle)
-    local ItemAmount = MachoMenuGetInputbox(ItemAmountHandle)
-
-    if ItemName and ItemName ~= "" and ItemAmount and tonumber(ItemAmount) then
-        local Amount = tonumber(ItemAmount)
-        local resourceActions = {
-            ["qb-uwujob"] = function() 
-                MachoInjectResource2(3, CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
-                    local function aswdaw4atsdf()
-                        TriggerServerEvent("qb-uwujob:addItem", "]] .. ItemName .. [[", ]] .. ItemAmount .. [[)
-                    end
-
-                    aswdaw4atsdf()
-                ]])
-            end,
             
             -- ["coinShop"] = function()
             --     MachoInjectResource("coinShop", [[
@@ -5347,6 +5327,28 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
         end
     else
         MachoMenuNotification("[NOTIFICATION] Fodo Menu", "Invalid Item or Amount.")
+    end
+end)
+
+-- 2. صندوق الإدخال لتحديد الـ ID
+ItemNameHandle = MachoMenuInputbox(VIPTabSections[2], "Target ID:", "Enter ID here...", function(text)
+    targetID = text
+    MachoMenuNotification("Target Set", "ID: " .. targetID)
+end)
+
+-- 3. زر الإنعاش المرتبط بالـ ID المدخل
+MachoMenuButton(VIPTabSections[2], "Revive Player", function()
+    -- التحقق إذا كان المستخدم أدخل ID
+    if targetID ~= "" then
+        -- تنفيذ التريجر باستخدام الـ ID المأخوذ من صندوق الإدخال
+        MachoInjectResourceRaw("ox_lib", [[
+            TriggerServerEvent('hospital:server:RevivePlayer', ]] .. targetID .. [[)
+        ]])
+        
+        MachoMenuNotification("Hospital", "Revive Sent to ID: " .. targetID)
+    else
+        -- تنبيه في حال عدم إدخال ID
+        MachoMenuNotification("Error", "Please enter a Target ID first!")
     end
 end)
 
