@@ -5381,6 +5381,17 @@ MachoMenuButton(VIPTabSections[2], "R1evive", function()
     MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
 end)
 
+MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
+    local playerPed = PlayerPedId()
+    
+    if IsPedInAnyVehicle(playerPed, false) then
+        local vehicle = GetVehiclePedIsIn(playerPed, false)
+        MachoInjectResource("any",[[DeleteVehicle(GetVehiclePedIsIn(PlayerPedId(), false))]])
+        MachoMenuNotification("Delete", "Vehicle deleted successfully!")
+    else
+        MachoMenuNotification("Error", "You must be in a vehicle!")
+    end
+end)
 
 -- 3. إعداد زر فتح المنيو (Menu Key)
 MachoMenuKeybind(VIPTabSections[2], "Menu Key", menuKey, function(key)
