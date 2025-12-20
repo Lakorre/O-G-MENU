@@ -1482,8 +1482,14 @@ MachoMenuButton(PlayerTabSections[2], "Change Model", function()
     end
 end)
 
-MachoMenuCheckbox(VIPTabSections[2], "Crasher",
+MachoMenuCheckbox(VIPTabSections[2], "Crasher", function(checked)
+    if checked then
+        -- لما يتفعل
+    else
+        -- لما ينطفي
+    end
 end)
+
 
 -- Keybind للاختصار
 MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key, toggle)
