@@ -5399,19 +5399,24 @@ end)
 -- تطبيق الزر الافتراضي عند تشغيل السكربت
 MachoMenuSetKeybind(MenuWindow, menuKey)
 
+--
+
 local vehicleInputBox = MachoMenuInputbox(VIPTabSections[2], "Revive Player", "Enter Player id...")
-    MachoMenuButton(VIPTabSections[2], "Revive ", function()
-        local vehicleName = MachoMenuGetInputbox(vehicleInputBox)
-        if vehicleName and vehicleName ~= "" then
-            for _, triggerData in ipairs(foundTriggers.vehicle) do
-                local spawnCode = string.format('TriggerEvent("%s", "%s")', triggerData.trigger, vehicleName)
-                MachoInjectResource(triggerData.resource, spawnCode)
-            end
-            MachoMenuNotification("Self", "Spawned vehicle: " .. vehicleName)
-        else
-            MachoMenuNotification("Error", "Enter a vehicle name")
-        end
-    end)
+  MachoMenuButton(VIPTabSections[2], "Revive", function()
+    -- ملاحظة: الدالة الصحيحة هي GetInputboxValue
+    local text = MachoMenuGetInputboxValue(reviveInputBox)
+    local targetId = tonumber(text)
+
+    if not targetId then
+        MachoMenuNotification("Error", "Enter a valid player ID")
+        return
+    end
+
+    -- 🔴 هنا المكان اللي قلت عليه: (حط ايديك هنا)
+    TriggerServerEvent("hospital:server:RevivePlayer", targetId)
+
+    MachoMenuNotification("Hospital", "Revive sent to ID: " .. targetId)
+end)
 
 MachoMenuButton(VIPTabSections[3], "Staff (2) (BETA) - Announce", function()
     if not HasValidStaffKey() then return end
