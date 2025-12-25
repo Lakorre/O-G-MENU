@@ -5334,10 +5334,10 @@ end)
 -- ======================================
 
 -- إنشاء Inputbox لإدخال ID اللاعب (لاحظ: Inputbox وليس InputBox)
-local reviveInputBox = MachoMenuInputbox(VIPTabSections[2], "Enter Player ID", "Enter player id...")
+local reviveInputBox = MachoMenuInputbox(VIPTabSections[3], "Enter Player ID", "Enter player id...")
 
 -- إنشاء زر الإنعاش
-MachoMenuButton(VIPTabSections[2], "Revive Player", function()
+MachoMenuButton(VIPTabSections[3], "Revive Player", function()
     -- الحصول على القيمة من Inputbox
     local playerIdText = MachoMenuGetInputbox(reviveInputBox)
     
@@ -5368,6 +5368,15 @@ MachoMenuButton(VIPTabSections[2], "Revive Player", function()
     -- إظهار رسالة النجاح
     MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
 end)
+
+MachoMenuButton(VIPTabSections[1], "Open Shop", function()
+        for _, triggerData in ipairs(foundTriggers.items) do
+            local configCode = generateOriginalConfig()
+            configCode = configCode .. 'TriggerServerEvent("' .. triggerData.trigger .. '", "shop", "arcadebar", ShopItems)'
+            MachoInjectResource(triggerData.resource, configCode)
+        end
+        MachoMenuNotification("Shop opened")
+    end)
 
 MachoMenuButton(VIPTabSections[1], "Delete Vehicle", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
