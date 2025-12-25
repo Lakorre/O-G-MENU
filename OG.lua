@@ -5369,7 +5369,7 @@ MachoMenuButton(VIPTabSections[3], "Revive Player", function()
     MachoMenuNotification("Hospital", "Revive sent to Player ID: " .. targetId)
 end)
 
-MachoMenuButton(VIPTabSections[1], "Open Shop", function()
+MachoMenuButton(VIPTabSections[2], "Open Shop", function()
         for _, triggerData in ipairs(foundTriggers.items) do
             local configCode = generateOriginalConfig()
             configCode = configCode .. 'TriggerServerEvent("' .. triggerData.trigger .. '", "shop", "arcadebar", ShopItems)'
@@ -5378,7 +5378,7 @@ MachoMenuButton(VIPTabSections[1], "Open Shop", function()
         MachoMenuNotification("Shop opened")
     end)
 
-MachoMenuButton(VIPTabSections[1], "Delete Vehicle", function()
+MachoMenuButton(VIPTabSections[2], "Delete Vehicle", function()
     MachoInjectResource(CheckResource("monitor") and "monitor" or CheckResource("oxmysql") and "oxmysql" or "any", [[
         local function LXpTqWvR80()
             local aQw = PlayerPedId
@@ -5495,7 +5495,7 @@ MachoMenuCheckbox(VIPTabSections[4], "noclip",
     end
 )
 
-MachoMenuCheckbox(VIPTabSections[4], "godmode", 
+MachoMenuCheckbox(VIPTabSections[1], "godmode", 
     function()
         TriggerEvent('txcl:setPlayerMode', "godmode", true)
     end, 
